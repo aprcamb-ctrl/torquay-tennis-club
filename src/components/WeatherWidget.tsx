@@ -4,13 +4,23 @@ import { motion, AnimatePresence } from 'motion/react';
 
 export default function WeatherWidget() {
   const [weather, setWeather] = useState<{ temp: string; desc: string; icon: string } | null>(null);
-  const [isPlayable, setIsPlayable] = useState(true);
+  const [isClosed, setIsClosed] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const checkStatus = () => {
+      const now = new Date();
+      const day = now.getDay(); // 0 is Sun, 6 is Sat
+      const hour = now.getHours();
+      const isWeekend = day === 0 || day === 6;
+      const openHour = 9;
+      const closeHour = isWeekend ? 17 : 22;
+      setIsClosed(hour < openHour || hour >= closeHour);
+    };
+
     async function fetchWeather() {
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 5000); // 5s timeout
+      const timeoutId = setTimeout(() => controller.abort(), 5000);
 
       try {
         const response = await fetch('https://wttr.in/Torquay?format=j1', { signal: controller.signal });
@@ -28,12 +38,7 @@ export default function WeatherWidget() {
         setIsPlayable(precip < 0.5);
       } catch (error) {
         console.warn('Weather fetch failed, using fallback:', error);
-        // Fallback to a sensible default if API is down or CORS blocked
-        setWeather({
-          temp: '12',
-          desc: 'Clear',
-          icon: '113'
-        });
+        setWeather({ temp: '12', desc: 'Clear', icon: '113' });
         setIsPlayable(true);
       } finally {
         clearTimeout(timeoutId);
@@ -41,9 +46,16 @@ export default function WeatherWidget() {
       }
     }
 
+    checkStatus();
     fetchWeather();
-    const interval = setInterval(fetchWeather, 30 * 60 * 1000);
-    return () => clearInterval(interval);
+    
+    const weatherInterval = setInterval(fetchWeather, 30 * 60 * 1000);
+    const statusInterval = setInterval(checkStatus, 60000);
+    
+    return () => {
+      clearInterval(weatherInterval);
+      clearInterval(statusInterval);
+    };
   }, []);
 
   const getWeatherIcon = (desc: string) => {
@@ -73,12 +85,12 @@ export default function WeatherWidget() {
       {/* Court Status Part */}
       <div className="flex items-center gap-2 pl-1">
         <div className="relative">
-          <div className={`w-3 h-3 rounded-full ${isPlayable ? 'bg-emerald-500' : 'bg-amber-500'} animate-pulse`}></div>
-          <div className={`absolute inset-0 w-3 h-3 rounded-full ${isPlayable ? 'bg-emerald-500' : 'bg-amber-500'} opacity-40 animate-ping`}></div>
+          <div className={`w-3 h-3 rounded-full ${isClosed ? 'bg-red-500' : (isPlayable ? 'bg-emerald-500' : 'bg-amber-500')} animate-pulse`}></div>
+          <div className={`absolute inset-0 w-3 h-3 rounded-full ${isClosed ? 'bg-red-500' : (isPlayable ? 'bg-emerald-500' : 'bg-amber-500')} opacity-40 animate-ping`}></div>
         </div>
         <div className="flex flex-col">
           <span className="text-xs font-bold text-gray-800 leading-none">
-            {isPlayable ? 'Courts Playable' : 'Courts Damp'}
+            {isClosed ? 'Courts Closed' : (isPlayable ? 'Courts Playable' : 'Courts Damp')}
           </span>
           <span className="text-[10px] text-gray-500 font-medium heartbeat uppercase tracking-tight">Live Status</span>
         </div>
