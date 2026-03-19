@@ -14,6 +14,7 @@ import Testimonials from './components/Testimonials';
 import Footer from './components/Footer';
 import ChatWidget from './components/ChatWidget';
 import EventPopup from './components/EventPopup';
+import WeatherWidget from './components/WeatherWidget';
 
 export default function App() {
   return (
@@ -29,6 +30,7 @@ export default function App() {
         <Testimonials />
       </main>
       <Footer />
+      <WeatherWidget />
       <EventPopup />
       <ChatWidget />
     </div>
