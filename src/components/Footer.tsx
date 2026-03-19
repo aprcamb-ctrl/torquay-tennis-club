@@ -5,11 +5,25 @@ export default function Footer() {
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
 
-  const handleNewsletterSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleNewsletterSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (email.trim()) {
-      setSubscribed(true);
-      setEmail('');
+      try {
+        const response = await fetch('/api/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email }),
+        });
+
+        if (response.ok || response.status === 409) {
+          setSubscribed(true);
+          setEmail('');
+        } else {
+          console.error('Subscription failed');
+        }
+      } catch (error) {
+        console.error('Newsletter error:', error);
+      }
     }
   };
   return (
