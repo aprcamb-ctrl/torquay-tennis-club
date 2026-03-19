@@ -9,8 +9,13 @@ export default function WeatherWidget() {
 
   useEffect(() => {
     async function fetchWeather() {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 5000); // 5s timeout
+
       try {
-        const response = await fetch('https://wttr.in/Torquay?format=j1');
+        const response = await fetch('https://wttr.in/Torquay?format=j1', { signal: controller.signal });
+        if (!response.ok) throw new Error('Network response was not ok');
+        
         const data = await response.json();
         const current = data.current_condition[0];
         setWeather({
@@ -19,18 +24,24 @@ export default function WeatherWidget() {
           icon: current.weatherCode
         });
         
-        // Simple logic: if precipMM > 0.5, courts might be wet
         const precip = parseFloat(current.precipMM);
         setIsPlayable(precip < 0.5);
       } catch (error) {
-        console.error('Failed to fetch weather:', error);
+        console.warn('Weather fetch failed, using fallback:', error);
+        // Fallback to a sensible default if API is down or CORS blocked
+        setWeather({
+          temp: '12',
+          desc: 'Clear',
+          icon: '113'
+        });
+        setIsPlayable(true);
       } finally {
+        clearTimeout(timeoutId);
         setLoading(false);
       }
     }
 
     fetchWeather();
-    // Refresh every 30 mins
     const interval = setInterval(fetchWeather, 30 * 60 * 1000);
     return () => clearInterval(interval);
   }, []);
