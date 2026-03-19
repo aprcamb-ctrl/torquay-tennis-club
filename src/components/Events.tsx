@@ -30,7 +30,7 @@ export default function Events() {
       time: '10:00 AM - 5:30 PM',
       location: 'Torquay Tennis Club',
       description: 'Welcome spring with a massive weekend Pickleball festival! Exciting matches, food, and fun for all skill levels.',
-      image: 'https://i.postimg.cc/MH9x3RS3/DUPR.jpg',
+      image: 'https://i.postimg.cc/x8pD32vF/Pickleball-Festival-Palm-Shield.png',
       bookingUrl: '#',
     },
     {
