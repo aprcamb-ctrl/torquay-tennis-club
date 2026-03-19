@@ -24,7 +24,7 @@ export default function WeatherWidget() {
       const timeoutId = setTimeout(() => controller.abort(), 5000);
 
       try {
-        const response = await fetch('https://wttr.in/Torquay?format=j1', { signal: controller.signal });
+        const response = await fetch('https://wttr.in/TQ2+5HP?format=j1', { signal: controller.signal });
         if (!response.ok) throw new Error('Network response was not ok');
         
         const data = await response.json();
