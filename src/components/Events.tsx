@@ -20,7 +20,7 @@ export default function Events() {
       time: '10:00 AM - 2:00 PM',
       location: 'Torquay Tennis Club',
       description: 'Test your skills in our upcoming official DUPR Pickleball event. Perfect for players looking to establish or improve their rating.',
-      image: 'https://images.unsplash.com/photo-1613918128521-82d2c125df9f?q=80&w=2070&auto=format&fit=crop',
+      image: 'https://i.postimg.cc/MH9x3RS3/DUPR.jpg',
       bookingUrl: '#',
     },
     {
@@ -30,7 +30,7 @@ export default function Events() {
       time: '10:00 AM - 5:30 PM',
       location: 'Torquay Tennis Club',
       description: 'Welcome spring with a massive weekend Pickleball festival! Exciting matches, food, and fun for all skill levels.',
-      image: 'https://images.unsplash.com/photo-1622279457486-640aca4aed9a?q=80&w=2070&auto=format&fit=crop',
+      image: 'https://i.postimg.cc/MH9x3RS3/DUPR.jpg',
       bookingUrl: '#',
     },
     {
@@ -87,7 +87,7 @@ export default function Events() {
               </div>
               <div className="p-8 flex flex-col flex-grow">
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">{event.name}</h3>
-                
+
                 <div className="space-y-3 mb-6 border-b border-gray-100 pb-6">
                   <div className="flex items-center text-gray-600">
                     <Calendar className="w-5 h-5 mr-3 text-emerald-500" />
