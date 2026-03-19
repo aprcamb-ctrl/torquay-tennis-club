@@ -19,7 +19,7 @@ export default function Membership() {
     },
     {
       name: 'Adult Full',
-      price: '£240',
+      price: '£325',
       period: '/year',
       description: 'Full playing rights, 7 days a week. Best value for regular players.',
       features: [
@@ -98,8 +98,8 @@ export default function Membership() {
               <a
                 href="#contact"
                 className={`w-full py-4 px-6 rounded-xl font-bold text-center transition-all ${tier.popular
-                    ? 'bg-emerald-500 text-white hover:bg-emerald-600 shadow-lg shadow-emerald-500/30'
-                    : 'bg-gray-700 text-white hover:bg-gray-600'
+                  ? 'bg-emerald-500 text-white hover:bg-emerald-600 shadow-lg shadow-emerald-500/30'
+                  : 'bg-gray-700 text-white hover:bg-gray-600'
                   }`}
               >
                 {tier.buttonText}
