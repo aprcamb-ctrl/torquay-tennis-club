@@ -9,6 +9,7 @@ import Facilities from './components/Facilities';
 import OtherSports from './components/OtherSports';
 import Events from './components/Events';
 import Programs from './components/Programs';
+import CoachingDetail from './components/CoachingDetail';
 import Membership from './components/Membership';
 import Testimonials from './components/Testimonials';
 import Footer from './components/Footer';
@@ -26,6 +27,7 @@ export default function App() {
         <OtherSports />
         <Events />
         <Programs />
+        <CoachingDetail />
         <Membership />
         <Testimonials />
       </main>

@@ -59,7 +59,7 @@ export default function Programs() {
               <p className="text-gray-600 leading-relaxed">
                 {program.description}
               </p>
-              <a href="#contact" className="inline-flex items-center text-emerald-600 font-semibold mt-6 hover:text-emerald-700">
+              <a href="#coaching-detail" className="inline-flex items-center text-emerald-600 font-semibold mt-6 hover:text-emerald-700">
                 Learn more <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
               </a>
             </motion.div>

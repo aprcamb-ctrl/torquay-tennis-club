@@ -55,15 +55,15 @@ export default function Footer() {
             <ul className="space-y-4">
               <li className="flex items-start gap-3 text-gray-400">
                 <MapPin className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
-                <span>123 Tennis Lane<br />Torquay, TQ1 1AB<br />United Kingdom</span>
+                <span>Belgrave Road<br />Torquay, TQ2 5HP<br />United Kingdom</span>
               </li>
               <li className="flex items-center gap-3 text-gray-400">
                 <Phone className="w-5 h-5 text-emerald-500 flex-shrink-0" />
-                <a href="tel:+441803123456" className="hover:text-white transition-colors">+44 1803 123456</a>
+                <a href="tel:+44180209500" className="hover:text-white transition-colors">+44 1803 123456</a>
               </li>
               <li className="flex items-center gap-3 text-gray-400">
                 <Mail className="w-5 h-5 text-emerald-500 flex-shrink-0" />
-                <a href="mailto:info@torquaytennisclub.co.uk" className="hover:text-white transition-colors">hello@torquaytennis.co.uk</a>
+                <a href="mailto:chairman@torquaytennisclub.co.uk" className="hover:text-white transition-colors">chairman@torquaytennisclub.co.uk</a>
               </li>
               <li className="pt-4 border-t border-gray-800">
                 <p className="text-emerald-400 font-bold text-xs uppercase tracking-widest mb-2">Opening Hours</p>
