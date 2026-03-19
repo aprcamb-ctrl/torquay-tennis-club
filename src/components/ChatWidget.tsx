@@ -50,7 +50,7 @@ You can find more details in the Events section!`;
 
   // 5. Check Time/Location
   if (lowerInput.includes('hour') || lowerInput.includes('open') || lowerInput.includes('time')) {
-    return `The club is open daily from 7:00 AM to 10:00 PM.`;
+    return `The club is open Monday to Friday from 9:00 AM to 10:00 PM, and Saturday/Sunday from 9:00 AM to 5:00 PM.`;
   }
   if (lowerInput.includes('address') || lowerInput.includes('location') || lowerInput.includes('where')) {
     return `We are located at ${CLUB_KNOWLEDGE.contact.address}.`;

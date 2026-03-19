@@ -65,6 +65,13 @@ export default function Footer() {
                 <Mail className="w-5 h-5 text-emerald-500 flex-shrink-0" />
                 <a href="mailto:hello@torquaytennis.co.uk" className="hover:text-white transition-colors">hello@torquaytennis.co.uk</a>
               </li>
+              <li className="pt-4 border-t border-gray-800">
+                <p className="text-emerald-400 font-bold text-xs uppercase tracking-widest mb-2">Opening Hours</p>
+                <div className="text-gray-400 text-sm space-y-1">
+                  <p>Mon - Fri: 9:00 AM - 10:00 PM</p>
+                  <p>Sat - Sun: 9:00 AM - 5:00 PM</p>
+                </div>
+              </li>
             </ul>
           </div>
 
