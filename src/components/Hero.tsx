@@ -98,7 +98,7 @@ export default function Hero() {
         >
           {[
             { label: 'Premium Courts', value: '8', icon: Trophy },
-            { label: 'Active Members', value: '500+', icon: Users },
+            { label: 'Active Members', value: '700+', icon: Users },
             { label: 'Padel Courts', value: '3', icon: LayoutGrid },
             { label: 'Outdoor Pickleball Courts', value: '2', icon: LayoutGrid },
           ].map((stat, i) => (

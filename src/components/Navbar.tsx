@@ -21,7 +21,7 @@ export default function Navbar() {
           <div className="flex items-center gap-8">
             <a href="#" className="flex items-center">
               <img 
-                src="https://lh3.googleusercontent.com/pw/AP1GczOtaYtb30tT4PCdraLRKGqEGAzkElmWlw7rVMak4GUIUY9Wysv4Ej2nGW9MNwspSooZbOQs79c6U8wDUJ-olxA5hMObbxwp9x_G7kWzsnfvgEcbcmblMKlQZkKWQNXQ48XEn1ohtzI68ASf_tr9-l9LFokJpAPVjdm1wEmlc0ksg_S3W1n9sxm3VER-T2gNluRs28PZ5c3hOiWxzHrxb8sPlcXser2vNFvUOuKbKrS07QurdDR1BJqr95nFgAmwZuO8b_OJ42GvZ5_glTR2MU8Fa22_1qoOVYHPzZ8vyTsCZk-xmeAdKgobR_zCh2sr9XH9tFfp0tyPK6ovjV_zoGqG75OgQ5LkeemWqDBbfUfwi6DsSRJufBSqlh57A9qIlRRMf_QC7MIuWVvbH2-ALm6DlrInLKeI7gGMBLgymf90yP3psjTuHJZIgc6hXFh0JCb_qqRbJ984XxEPwr6yzot_R6eLIB5uZFeVHe6S6q-hLWWom71eiOQ0VNHTB9p09UKEoe1Pf9N_JhBlzzznzdbqzyZ9UJz4w7lPPudWq9Y_S1LcKW2ntRo9YHPPRx9fHBvgpmkiXWDEI64Y8qBFwuuYVWMDWLjF7bsMDys8VaWmD3y3CwfM6DlD2hs2GqYrj-fe9IveaBhQcnUHnf2bgVPKutkjpU2Zxv4CcQ4Ev6ZKz_I6Qm7DsPnyehVEhefXW5X6DieI5UWq0oOvOm7VeZuvwpYRj_phEkDPmWNTFkBPvlCo7eOEXHxnaT1Derw2Y4P0b1oTPZ2Ih--5odVHwhg0Mf3VGa21-WCMlpjJPK9bt7TmN4Lovg-Mkci52itzVZIhHDPgxxpHYRflO5-I5uhnfGKyjN0uOasFL9vxWofRd8ye2_TnnrwDUzVlD1DqAr-BMT0qodj3neIpW7sEWyDbXVYQe5u8dHXFTkQrFkPf_CmbUR7FHr3B=w825-h369-s-no?authuser=1" 
+                src="https://i.postimg.cc/50Jt9Ptj/TTC-Logo-New.jpg" 
                 alt="Torquay Tennis Club Logo" 
                 className="h-16 w-auto object-contain"
                 referrerPolicy="no-referrer"

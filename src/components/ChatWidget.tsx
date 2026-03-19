@@ -78,7 +78,7 @@ export default function ChatWidget() {
 
         Website Information:
         - Torquay Tennis Club is a local hub for tennis excellence.
-        - Features: 8 Premium Courts, 500+ Active Members, 3 Padel Courts, 2 Outdoor Pickleball Courts.
+        - Features: 8 Premium Courts, 700+ Active Members, 3 Padel Courts, 2 Outdoor Pickleball Courts.
         - Programs: Junior Academy, Adult Social, Professional Coaching.
         - Membership: Full Membership, Junior Membership, Family Membership.
         - Location: 123 Tennis Lane, Torquay, TQ1 1AB, United Kingdom.
