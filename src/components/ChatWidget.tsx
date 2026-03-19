@@ -1,6 +1,22 @@
+import { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { MessageCircle, X, Send, Phone, Bot } from 'lucide-react';
+import { GoogleGenAI } from "@google/genai";
+import knowledgeBase from '../knowledge-base.json';
 import { CLUB_KNOWLEDGE } from '../chat-constants';
 
-// ... (existing helper function to find matches)
+// From .env: GEMINI_API_KEY or VITE_GEMINI_API_KEY (restart dev server after adding)
+const API_KEY =
+  (typeof process !== 'undefined' && (process as { env?: { GEMINI_API_KEY?: string } }).env?.GEMINI_API_KEY) ||
+  import.meta.env.VITE_GEMINI_API_KEY;
+
+interface Message {
+  id: string;
+  text: string;
+  sender: 'user' | 'bot';
+  timestamp: Date;
+}
+
 function findClubAnswer(input: string): string | null {
   const lowerInput = input.toLowerCase();
 
@@ -43,13 +59,58 @@ You can find more details in the Events section!`;
     return `You can reach us at ${CLUB_KNOWLEDGE.contact.phone} or ${CLUB_KNOWLEDGE.contact.email}.`;
   }
 
+  // 6. Check JSON Knowledge Base (questions directly)
+  const kbMatch = knowledgeBase.additional_answers.find(item => 
+    item.question.toLowerCase().split(' ').some(word => word.length > 3 && lowerInput.includes(word))
+  );
+  if (kbMatch) return kbMatch.answer;
+
   return null;
 }
 
-// ... (rest of component)
-    if (!API_KEY || API_KEY === 'YOUR_KEY_HERE') {
-      const foundAnswer = findClubAnswer(input);
+export default function ChatWidget() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [messages, setMessages] = useState<Message[]>([
+    {
+      id: '1',
+      text: "Hi! I'm your Torquay Tennis Club assistant. How can I help you today?",
+      sender: 'bot',
+      timestamp: new Date(),
+    },
+  ]);
+  const [input, setInput] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
+  const handleSend = async () => {
+    if (!input.trim() || isLoading) return;
+
+    const userMessage: Message = {
+      id: Date.now().toString(),
+      text: input,
+      sender: 'user',
+      timestamp: new Date(),
+    };
+
+    setMessages((prev) => [...prev, userMessage]);
+    const currentInput = input;
+    setInput('');
+    setIsLoading(true);
+
+    const fallbackMessage = "I'm having trouble connecting. Please try again or call us at +44 1803 123456.";
+
+    // SMART LOCAL FALLBACK (Always check this first or if API key is invalid)
+    if (!API_KEY || API_KEY === 'YOUR_KEY_HERE') {
+      const foundAnswer = findClubAnswer(currentInput);
+      
       const botMessage: Message = {
         id: (Date.now() + 1).toString(),
         text: foundAnswer || "I'm not exactly sure about that, but the club office can help! You can call us on +44 1803 123456 or email hello@torquaytennis.co.uk. Would you like me to call the office for you?",
@@ -67,30 +128,14 @@ You can find more details in the Events section!`;
       
       const systemInstruction = `
         You are an AI assistant for Torquay Tennis Club.
-        Your goal is to answer user questions based on the following priority:
-        1. Use the website information provided below.
-        2. If not found, use the additional answers from the knowledge base provided below.
-        3. If still not found, you MUST say: "You can contact the club on +44 1803 123456" and then ask the user if they want you to call the club on the listed number automatically.
-
-        Website Information:
-        - Torquay Tennis Club is a local hub for tennis excellence.
-        - Features: 8 Premium Courts, 700+ Active Members, 3 Padel Courts, 2 Outdoor Pickleball Courts.
-        - Programs: Junior Academy, Adult Social, Professional Coaching.
-        - Membership: Full Membership, Junior Membership, Family Membership.
-        - Location: 123 Tennis Lane, Torquay, TQ1 1AB, United Kingdom.
-        - Phone: +44 1803 123456.
-        - Email: hello@torquaytennis.co.uk.
-
-        Knowledge Base (Additional Answers):
-        ${JSON.stringify(knowledgeBase.additional_answers, null, 2)}
-
-        Be professional, friendly, and helpful. If you cannot find the answer in the website info or knowledge base, follow the fallback instruction in step 3 exactly.
+        Your goal is to answer user questions based on the website and knowledge base info.
+        Be professional, friendly, and helpful.
       `;
 
       const response = await ai.models.generateContent({
-        model: "gemini-2.5-flash",
+        model: "gemini-2.0-flash", // Use 2.0 flash as it's more stable for basic chat
         contents: [
-          { role: 'user', parts: [{ text: input }] }
+          { role: 'user', parts: [{ text: currentInput }] }
         ],
         config: {
           systemInstruction,
@@ -100,7 +145,7 @@ You can find more details in the Events section!`;
       const responseText = typeof response.text === 'function' ? await response.text() : (response.text ?? null);
       const botMessage: Message = {
         id: (Date.now() + 1).toString(),
-        text: responseText || "You can contact the club on +44 1803 123456. Would you like me to call the club for you?",
+        text: responseText || "I'm not exactly sure, but you can contact the club on +44 1803 123456.",
         sender: 'bot',
         timestamp: new Date(),
       };
@@ -108,13 +153,13 @@ You can find more details in the Events section!`;
       setMessages((prev) => [...prev, botMessage]);
     } catch (error) {
       console.error('Chat Error:', error);
-      const errorMessage: Message = {
+      const botMessage: Message = {
         id: (Date.now() + 1).toString(),
-        text: fallbackMessage,
+        text: findClubAnswer(currentInput) || fallbackMessage,
         sender: 'bot',
         timestamp: new Date(),
       };
-      setMessages((prev) => [...prev, errorMessage]);
+      setMessages((prev) => [...prev, botMessage]);
     } finally {
       setIsLoading(false);
     }
@@ -131,14 +176,14 @@ You can find more details in the Events section!`;
             className="mb-4 w-[350px] sm:w-[400px] h-[500px] bg-white rounded-2xl shadow-2xl border border-gray-100 flex flex-col overflow-hidden"
           >
             {/* Header */}
-            <div className="bg-emerald-600 p-4 text-white flex justify-between items-center">
+            <div className="bg-emerald-600 p-4 text-white flex justify-between items-center shadow-lg">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
                   <Bot className="w-6 h-6" />
                 </div>
                 <div>
                   <h3 className="font-bold">Club Assistant</h3>
-                  <p className="text-xs text-emerald-100">Online & ready to help</p>
+                  <p className="text-xs text-emerald-100 italic">Online & helpful</p>
                 </div>
               </div>
               <button 
@@ -151,16 +196,16 @@ You can find more details in the Events section!`;
             </div>
 
             {/* Messages */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
+            <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50/50">
               {messages.map((msg) => (
                 <div
                   key={msg.id}
                   className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
                 >
                   <div
-                    className={`max-w-[80%] p-3 rounded-2xl text-sm ${
+                    className={`max-w-[85%] p-3 rounded-2xl text-sm whitespace-pre-line ${
                       msg.sender === 'user'
-                        ? 'bg-emerald-600 text-white rounded-tr-none'
+                        ? 'bg-emerald-600 text-white rounded-tr-none shadow-md shadow-emerald-100'
                         : 'bg-white text-gray-800 border border-gray-100 shadow-sm rounded-tl-none'
                     }`}
                   >
@@ -169,7 +214,7 @@ You can find more details in the Events section!`;
                       <div className="mt-2 pt-2 border-t border-gray-100">
                         <a 
                           href="tel:+441803123456"
-                          className="inline-flex items-center gap-2 text-emerald-600 font-semibold hover:text-emerald-700 transition-colors"
+                          className="inline-flex items-center gap-2 text-emerald-600 font-bold hover:text-emerald-700 transition-colors"
                         >
                           <Phone className="w-4 h-4" />
                           Call Now
@@ -181,11 +226,11 @@ You can find more details in the Events section!`;
               ))}
               {isLoading && (
                 <div className="flex justify-start">
-                  <div className="bg-white border border-gray-100 shadow-sm p-3 rounded-2xl rounded-tl-none">
-                    <div className="flex gap-1">
-                      <span className="w-1.5 h-1.5 bg-gray-300 rounded-full animate-bounce"></span>
-                      <span className="w-1.5 h-1.5 bg-gray-300 rounded-full animate-bounce [animation-delay:0.2s]"></span>
-                      <span className="w-1.5 h-1.5 bg-gray-300 rounded-full animate-bounce [animation-delay:0.4s]"></span>
+                  <div className="bg-white border border-gray-100 shadow-sm p-4 rounded-2xl rounded-tl-none">
+                    <div className="flex gap-1.5">
+                      <div className="w-2 h-2 bg-emerald-500 rounded-full animate-bounce"></div>
+                      <div className="w-2 h-2 bg-emerald-500 rounded-full animate-bounce [animation-delay:0.2s]"></div>
+                      <div className="w-2 h-2 bg-emerald-500 rounded-full animate-bounce [animation-delay:0.4s]"></div>
                     </div>
                   </div>
                 </div>
@@ -201,13 +246,13 @@ You can find more details in the Events section!`;
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && handleSend()}
-                  placeholder="Ask a question..."
-                  className="flex-1 bg-gray-100 border-none rounded-xl px-4 py-2 text-sm focus:ring-2 focus:ring-emerald-500 outline-none"
+                  placeholder="Ask about membership, events, or courts..."
+                  className="flex-1 bg-gray-100 border-none rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-emerald-500 outline-none transition-all"
                 />
                 <button
                   onClick={handleSend}
                   disabled={isLoading}
-                  className="p-2 bg-emerald-600 text-white rounded-xl hover:bg-emerald-700 transition-colors disabled:opacity-50"
+                  className="p-3 bg-emerald-600 text-white rounded-xl hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-100 disabled:opacity-50 active:scale-95"
                 >
                   <Send className="w-5 h-5" />
                 </button>
@@ -217,12 +262,11 @@ You can find more details in the Events section!`;
         )}
       </AnimatePresence>
 
-      {/* Toggle Button */}
       <motion.button
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         onClick={() => setIsOpen(!isOpen)}
-        className="w-14 h-14 bg-emerald-600 text-white rounded-full shadow-lg flex items-center justify-center hover:bg-emerald-700 transition-all"
+        className="w-14 h-14 bg-emerald-600 text-white rounded-full shadow-2xl flex items-center justify-center hover:bg-emerald-700 transition-all border-4 border-white"
         aria-label={isOpen ? 'Close chat' : 'Open chat assistant'}
       >
         {isOpen ? <X className="w-6 h-6" /> : <MessageCircle className="w-6 h-6" />}
