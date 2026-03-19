@@ -54,14 +54,44 @@ export default function ChatWidget() {
 
     const fallbackMessage = "I'm having trouble connecting. Please try again or call us at +44 1803 123456.";
 
-    if (!API_KEY) {
-      const errorMessage: Message = {
+    if (!API_KEY || API_KEY === 'YOUR_KEY_HERE') {
+      // SMART LOCAL FALLBACK
+      // If no API key is found, we use a basic keyword-matching algorithm 
+      // to answer questions from our internal knowledge base.
+      
+      const lowerInput = input.toLowerCase();
+      let foundAnswer = "";
+
+      // 1. Check Knowledge Base
+      const kbMatch = knowledgeBase.additional_answers.find(item => 
+        item.question.toLowerCase().split(' ').some(word => word.length > 3 && lowerInput.includes(word))
+      );
+      
+      if (kbMatch) {
+        foundAnswer = kbMatch.answer;
+      } else {
+        // 2. Check Website Info common keywords
+        if (lowerInput.includes('hour') || lowerInput.includes('open') || lowerInput.includes('time')) {
+          foundAnswer = "The club is open from 7:00 AM to 10:00 PM daily.";
+        } else if (lowerInput.includes('court') || lowerInput.includes('facility')) {
+          foundAnswer = "We have 8 Premium Tennis Courts, 3 Padel Courts, and 2 Outdoor Pickleball Courts!";
+        } else if (lowerInput.includes('member') || lowerInput.includes('join') || lowerInput.includes('price')) {
+          foundAnswer = "We have over 700 active members! You can join as a Full, Junior, or Family member in the Membership section below.";
+        } else if (lowerInput.includes('location') || lowerInput.includes('address') || lowerInput.includes('where')) {
+          foundAnswer = "We are located at 123 Tennis Lane, Torquay, TQ1 1AB.";
+        } else if (lowerInput.includes('contact') || lowerInput.includes('phone') || lowerInput.includes('email')) {
+          foundAnswer = "You can call us on +44 1803 123456 or email hello@torquaytennis.co.uk.";
+        }
+      }
+
+      const botMessage: Message = {
         id: (Date.now() + 1).toString(),
-        text: "Chat is not configured. Please call us at +44 1803 123456 or email hello@torquaytennis.co.uk.",
+        text: foundAnswer || "I'm not sure about that, but you can contact the club on +44 1803 123456 or email hello@torquaytennis.co.uk. Would you like me to call the office for you?",
         sender: 'bot',
         timestamp: new Date(),
       };
-      setMessages((prev) => [...prev, errorMessage]);
+      
+      setMessages((prev) => [...prev, botMessage]);
       setIsLoading(false);
       return;
     }
