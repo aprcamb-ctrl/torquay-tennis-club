@@ -77,16 +77,12 @@ export default function Hero() {
           transition={{ duration: 0.7, delay: 0.4 }}
           className="mt-16 relative rounded-2xl overflow-hidden shadow-2xl border border-gray-100 max-w-5xl mx-auto bg-gray-900 aspect-video"
         >
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="w-full h-full object-cover"
-          >
-            <source src="https://cdn.coverr.co/videos/coverr-tennis-court-1571/1080p.mp4" type="video/mp4" />
-          </video>
-          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
+          <iframe
+            src="https://player.mux.com/aE8eOR02kB02UKkZh00aSuAAcvvJle5ue4j01u01012nrvfxY?metadata-video-title=Welcome+to+Tennis+Paradise+_+2019+BNP+Paribas+Open&video-title=Welcome+to+Tennis+Paradise+_+2019+BNP+Paribas+Open"
+            style={{ width: '100%', border: 'none', aspectRatio: '16/9' }}
+            allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+            allowFullScreen
+          ></iframe>
         </motion.div>
 
         {/* Stats Row */}
