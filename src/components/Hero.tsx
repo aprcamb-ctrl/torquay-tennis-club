@@ -78,7 +78,7 @@ export default function Hero() {
           className="mt-16 relative rounded-2xl overflow-hidden shadow-2xl border border-gray-100 max-w-5xl mx-auto bg-gray-900 aspect-video"
         >
           <iframe
-            src="https://player.mux.com/aE8eOR02kB02UKkZh00aSuAAcvvJle5ue4j01u01012nrvfxY?metadata-video-title=Welcome+to+Tennis+Paradise+_+2019+BNP+Paribas+Open&video-title=Welcome+to+Tennis+Paradise+_+2019+BNP+Paribas+Open"
+            src="https://player.mux.com/aE8eOR02kB02UKkZh00aSuAAcvvJle5ue4j01u01012nrvfxY?metadata-video-title=Welcome+to+Tennis+Paradise+_+2019+BNP+Paribas+Open&video-title=Welcome+to+Tennis+Paradise+_+2019+BNP+Paribas+Open&autoplay=true&muted=true"
             style={{ width: '100%', border: 'none', aspectRatio: '16/9' }}
             allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
             allowFullScreen
