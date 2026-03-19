@@ -9,6 +9,7 @@ export default function Navbar() {
     { name: 'Home', href: '#' },
     { name: 'Facilities', href: '#facilities' },
     { name: 'Padel & Pickleball', href: '#other-sports' },
+    { name: 'Events', href: '#events' },
     { name: 'Programs', href: '#programs' },
     { name: 'Membership', href: '#membership' },
     { name: 'Contact', href: '#contact' },

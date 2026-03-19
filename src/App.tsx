@@ -7,6 +7,7 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Facilities from './components/Facilities';
 import OtherSports from './components/OtherSports';
+import Events from './components/Events';
 import Programs from './components/Programs';
 import Membership from './components/Membership';
 import Testimonials from './components/Testimonials';
@@ -22,6 +23,7 @@ export default function App() {
         <Hero />
         <Facilities />
         <OtherSports />
+        <Events />
         <Programs />
         <Membership />
         <Testimonials />
