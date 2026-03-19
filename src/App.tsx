@@ -3,6 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+import {Analytics} from '@vercel/analytics/react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Facilities from './components/Facilities';
@@ -33,6 +34,7 @@ export default function App() {
       <WeatherWidget />
       <EventPopup />
       <ChatWidget />
+      <Analytics />
     </div>
   );
 }
