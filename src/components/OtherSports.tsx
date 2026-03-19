@@ -47,7 +47,7 @@ export default function OtherSports() {
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-emerald-600 font-semibold tracking-wide uppercase text-sm mb-3">More Than Just Tennis</h2>
           <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-            Discover Padel & Pickleball
+            Discover Padel &amp; Pickleball
           </p>
           <p className="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">
             Expand your racquet skills with our dedicated facilities for the world's fastest-growing sports.

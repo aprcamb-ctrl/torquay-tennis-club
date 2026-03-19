@@ -8,7 +8,7 @@ import { CLUB_KNOWLEDGE } from '../chat-constants';
 // From .env: GEMINI_API_KEY or VITE_GEMINI_API_KEY (restart dev server after adding)
 const API_KEY =
   (typeof process !== 'undefined' && (process as { env?: { GEMINI_API_KEY?: string } }).env?.GEMINI_API_KEY) ||
-  import.meta.env.VITE_GEMINI_API_KEY;
+  (import.meta as any).env.VITE_GEMINI_API_KEY;
 
 interface Message {
   id: string;
@@ -142,7 +142,7 @@ export default function ChatWidget() {
         },
       });
 
-      const responseText = typeof response.text === 'function' ? await response.text() : (response.text ?? null);
+      const responseText = response.text || (typeof response.text === 'function' ? await (response as any).text() : null);
       const botMessage: Message = {
         id: (Date.now() + 1).toString(),
         text: responseText || "I'm not exactly sure, but you can contact the club on +44 1803 123456.",

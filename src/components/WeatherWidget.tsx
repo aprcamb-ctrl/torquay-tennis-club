@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'motion/react';
 export default function WeatherWidget() {
   const [weather, setWeather] = useState<{ temp: string; desc: string; icon: string } | null>(null);
   const [isClosed, setIsClosed] = useState(false);
+  const [isPlayable, setIsPlayable] = useState(true);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

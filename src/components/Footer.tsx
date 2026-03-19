@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { MapPin, Phone, Mail, Facebook, Instagram } from 'lucide-react';
 
 export default function Footer() {
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
 
-  const handleNewsletterSubmit = (e: React.FormEvent) => {
+  const handleNewsletterSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (email.trim()) {
       setSubscribed(true);
@@ -18,9 +18,9 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           <div>
             <div className="flex items-center mb-6">
-              <img 
-                src="https://i.postimg.cc/50Jt9Ptj/TTC-Logo-New.jpg" 
-                alt="Torquay Tennis Club Logo" 
+              <img
+                src="https://i.postimg.cc/50Jt9Ptj/TTC-Logo-New.jpg"
+                alt="Torquay Tennis Club Logo"
                 className="h-16 w-auto object-contain"
                 referrerPolicy="no-referrer"
               />
@@ -43,7 +43,7 @@ export default function Footer() {
             <ul className="space-y-4">
               <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Home</a></li>
               <li><a href="#facilities" className="text-gray-400 hover:text-white transition-colors">Facilities</a></li>
-              <li><a href="#other-sports" className="text-gray-400 hover:text-white transition-colors">Padel & Pickleball</a></li>
+              <li><a href="#other-sports" className="text-gray-400 hover:text-white transition-colors">Padel &amp; Pickleball</a></li>
               <li><a href="#events" className="text-gray-400 hover:text-white transition-colors">Events</a></li>
               <li><a href="#programs" className="text-gray-400 hover:text-white transition-colors">Programs</a></li>
               <li><a href="#membership" className="text-gray-400 hover:text-white transition-colors">Membership</a></li>
@@ -63,7 +63,7 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-3 text-gray-400">
                 <Mail className="w-5 h-5 text-emerald-500 flex-shrink-0" />
-                <a href="mailto:hello@torquaytennis.co.uk" className="hover:text-white transition-colors">hello@torquaytennis.co.uk</a>
+                <a href="mailto:info@torquaytennisclub.co.uk" className="hover:text-white transition-colors">hello@torquaytennis.co.uk</a>
               </li>
               <li className="pt-4 border-t border-gray-800">
                 <p className="text-emerald-400 font-bold text-xs uppercase tracking-widest mb-2">Opening Hours</p>
