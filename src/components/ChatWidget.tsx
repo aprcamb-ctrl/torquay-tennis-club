@@ -1,92 +1,58 @@
-import { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { MessageCircle, X, Send, Phone, Bot } from 'lucide-react';
-import { GoogleGenAI } from "@google/genai";
-import knowledgeBase from '../knowledge-base.json';
+import { CLUB_KNOWLEDGE } from '../chat-constants';
 
-// From .env: GEMINI_API_KEY or VITE_GEMINI_API_KEY (restart dev server after adding)
-const API_KEY =
-  (typeof process !== 'undefined' && (process as { env?: { GEMINI_API_KEY?: string } }).env?.GEMINI_API_KEY) ||
-  import.meta.env.VITE_GEMINI_API_KEY;
+// ... (existing helper function to find matches)
+function findClubAnswer(input: string): string | null {
+  const lowerInput = input.toLowerCase();
 
-interface Message {
-  id: string;
-  text: string;
-  sender: 'user' | 'bot';
-  timestamp: Date;
+  // 1. Check Membership
+  if (lowerInput.includes('membership') || lowerInput.includes('price') || lowerInput.includes('join') || lowerInput.includes('cost')) {
+    return `We offer several membership options: 
+${CLUB_KNOWLEDGE.membership.map(m => `• ${m.name} (${m.price}): ${m.description}`).join('\n')}
+Which one are you interested in?`;
+  }
+
+  // 2. Check Facilities
+  if (lowerInput.includes('court') || lowerInput.includes('facilit') || lowerInput.includes('padel') || lowerInput.includes('pickleball')) {
+    return `Our world-class facilities include:
+${CLUB_KNOWLEDGE.facilities.map(f => `• ${f.name}: ${f.detail}`).join('\n')}
+Would you like to know more about a specific facility?`;
+  }
+
+  // 3. Check Programs/Coaching
+  if (lowerInput.includes('coach') || lowerInput.includes('program') || lowerInput.includes('lesson') || lowerInput.includes('train')) {
+    return `We have programs for every level:
+${CLUB_KNOWLEDGE.programs.map(p => `• ${p.name}: ${p.detail}`).join('\n')}
+You can book private lessons with our LTA accredited coaches at the reception.`;
+  }
+
+  // 4. Check Events
+  if (lowerInput.includes('event') || lowerInput.includes('happen') || lowerInput.includes('night') || lowerInput.includes('festival')) {
+    return `We have some exciting upcoming events:
+${CLUB_KNOWLEDGE.events.map(e => `• ${e.name} (${e.date})`).join('\n')}
+You can find more details in the Events section!`;
+  }
+
+  // 5. Check Time/Location
+  if (lowerInput.includes('hour') || lowerInput.includes('open') || lowerInput.includes('time')) {
+    return `The club is open daily from 7:00 AM to 10:00 PM.`;
+  }
+  if (lowerInput.includes('address') || lowerInput.includes('location') || lowerInput.includes('where')) {
+    return `We are located at ${CLUB_KNOWLEDGE.contact.address}.`;
+  }
+  if (lowerInput.includes('contact') || lowerInput.includes('phone') || lowerInput.includes('email')) {
+    return `You can reach us at ${CLUB_KNOWLEDGE.contact.phone} or ${CLUB_KNOWLEDGE.contact.email}.`;
+  }
+
+  return null;
 }
 
-export default function ChatWidget() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      id: '1',
-      text: "Hi! I'm your Torquay Tennis Club assistant. How can I help you today?",
-      sender: 'bot',
-      timestamp: new Date(),
-    },
-  ]);
-  const [input, setInput] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
-
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
-
-  const handleSend = async () => {
-    if (!input.trim() || isLoading) return;
-
-    const userMessage: Message = {
-      id: Date.now().toString(),
-      text: input,
-      sender: 'user',
-      timestamp: new Date(),
-    };
-
-    setMessages((prev) => [...prev, userMessage]);
-    setInput('');
-    setIsLoading(true);
-
-    const fallbackMessage = "I'm having trouble connecting. Please try again or call us at +44 1803 123456.";
-
+// ... (rest of component)
     if (!API_KEY || API_KEY === 'YOUR_KEY_HERE') {
-      // SMART LOCAL FALLBACK
-      // If no API key is found, we use a basic keyword-matching algorithm 
-      // to answer questions from our internal knowledge base.
-      
-      const lowerInput = input.toLowerCase();
-      let foundAnswer = "";
-
-      // 1. Check Knowledge Base
-      const kbMatch = knowledgeBase.additional_answers.find(item => 
-        item.question.toLowerCase().split(' ').some(word => word.length > 3 && lowerInput.includes(word))
-      );
-      
-      if (kbMatch) {
-        foundAnswer = kbMatch.answer;
-      } else {
-        // 2. Check Website Info common keywords
-        if (lowerInput.includes('hour') || lowerInput.includes('open') || lowerInput.includes('time')) {
-          foundAnswer = "The club is open from 7:00 AM to 10:00 PM daily.";
-        } else if (lowerInput.includes('court') || lowerInput.includes('facility')) {
-          foundAnswer = "We have 8 Premium Tennis Courts, 3 Padel Courts, and 2 Outdoor Pickleball Courts!";
-        } else if (lowerInput.includes('member') || lowerInput.includes('join') || lowerInput.includes('price')) {
-          foundAnswer = "We have over 700 active members! You can join as a Full, Junior, or Family member in the Membership section below.";
-        } else if (lowerInput.includes('location') || lowerInput.includes('address') || lowerInput.includes('where')) {
-          foundAnswer = "We are located at 123 Tennis Lane, Torquay, TQ1 1AB.";
-        } else if (lowerInput.includes('contact') || lowerInput.includes('phone') || lowerInput.includes('email')) {
-          foundAnswer = "You can call us on +44 1803 123456 or email hello@torquaytennis.co.uk.";
-        }
-      }
+      const foundAnswer = findClubAnswer(input);
 
       const botMessage: Message = {
         id: (Date.now() + 1).toString(),
-        text: foundAnswer || "I'm not sure about that, but you can contact the club on +44 1803 123456 or email hello@torquaytennis.co.uk. Would you like me to call the office for you?",
+        text: foundAnswer || "I'm not exactly sure about that, but the club office can help! You can call us on +44 1803 123456 or email hello@torquaytennis.co.uk. Would you like me to call the office for you?",
         sender: 'bot',
         timestamp: new Date(),
       };
