@@ -23,6 +23,10 @@ export const CLUB_KNOWLEDGE = {
   contact: {
     phone: '+44 1803 123456',
     email: 'hello@torquaytennis.co.uk',
-    address: '123 Tennis Lane, Torquay, TQ1 1AB'
+    address: '123 Tennis Lane, Torquay, TQ1 1AB',
+    hours: {
+      weekday: '9:00 AM - 10:00 PM',
+      weekend: '9:00 AM - 5:00 PM'
+    }
   }
 };
