@@ -31,9 +31,9 @@ export default async function handler(
     if (process.env.RESEND_API_KEY) {
       await resend.emails.send({
         from: 'Torquay Tennis Club <onboarding@resend.dev>',
-        to: 'chairman@torquaytennisclub.co.uk',
+        to: 'aprcamb@googlemail.com',
         subject: `New Clubhouse Booking Enquiry - ${name}`,
-        reply_to: email,
+        replyTo: email,
         html: `
           <h2>New Clubhouse Booking Enquiry</h2>
           <p><strong>Name:</strong> ${name}</p>
