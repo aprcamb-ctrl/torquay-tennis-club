@@ -1,31 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { MapPin, Phone, Mail, Facebook, Instagram } from 'lucide-react';
 
 export default function Footer() {
-  const [email, setEmail] = useState('');
-  const [subscribed, setSubscribed] = useState(false);
-
-  const handleNewsletterSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (email.trim()) {
-      try {
-        const response = await fetch('/api/subscribe', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email }),
-        });
-
-        if (response.ok || response.status === 409) {
-          setSubscribed(true);
-          setEmail('');
-        } else {
-          console.error('Subscription failed');
-        }
-      } catch (error) {
-        console.error('Newsletter error:', error);
-      }
-    }
-  };
   return (
     <footer id="contact" className="bg-gray-900 text-white pt-24 pb-12 border-t border-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -92,29 +68,14 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="text-lg font-bold mb-6 text-emerald-400 uppercase tracking-wider text-sm">Newsletter</h3>
-            <p className="text-gray-400 mb-4">Subscribe to get the latest news and updates from the club.</p>
-            {subscribed ? (
-              <p className="text-emerald-400 font-medium">Thanks for subscribing! We&apos;ll be in touch.</p>
-            ) : (
-              <form onSubmit={handleNewsletterSubmit} className="flex flex-col gap-3">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Your email address"
-                  className="bg-gray-800 border border-gray-700 text-white px-4 py-3 rounded-lg focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-colors"
-                  required
-                  aria-label="Email address for newsletter"
-                />
-                <button
-                  type="submit"
-                  className="bg-emerald-600 text-white px-4 py-3 rounded-lg font-semibold hover:bg-emerald-700 transition-colors"
-                >
-                  Subscribe
-                </button>
-              </form>
-            )}
+            <h3 className="text-lg font-bold mb-6 text-emerald-400 uppercase tracking-wider text-sm">Official Club Sponsor</h3>
+            <div className="bg-white/5 rounded-xl p-6 border border-gray-800 backdrop-blur-sm group hover:border-emerald-500/30 transition-all duration-300">
+              <img
+                src="/images/sponsor-logo.png"
+                alt="Official Club Sponsor"
+                className="w-full h-auto object-contain brightness-90 group-hover:brightness-100 transition-all"
+              />
+            </div>
           </div>
         </div>
 
