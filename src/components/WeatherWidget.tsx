@@ -28,14 +28,17 @@ export default function WeatherWidget() {
         if (!response.ok) throw new Error('Network response was not ok');
         
         const data = await response.json();
-        const current = data.current_condition[0];
+        const current = data?.current_condition?.[0];
+        
+        if (!current) throw new Error('Weather data format unexpected');
+
         setWeather({
-          temp: current.temp_C,
-          desc: current.weatherDesc[0].value,
-          icon: current.weatherCode
+          temp: current.temp_C || '12',
+          desc: current.weatherDesc?.[0]?.value || 'Clear',
+          icon: current.weatherCode || '113'
         });
         
-        const precip = parseFloat(current.precipMM);
+        const precip = parseFloat(current.precipMM || '0');
         setIsPlayable(precip < 0.5);
       } catch (error) {
         console.warn('Weather fetch failed, using fallback:', error);
