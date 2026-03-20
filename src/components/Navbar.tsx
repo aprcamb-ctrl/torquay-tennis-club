@@ -1,21 +1,28 @@
-import { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
   const [activeLink, setActiveLink] = useState('Home');
 
+  useEffect(() => {
+    const currentPath = location.pathname;
+    if (currentPath === '/') setActiveLink('Home');
+    else if (currentPath === '/coaching') setActiveLink('Coaching');
+  }, [location]);
+
   const navLinks = [
-    { name: 'Home', href: '#' },
-    { name: 'Facilities', href: '#facilities' },
-    { name: 'Tennis', href: '#tennis' },
-    { name: 'Padel', href: '#padel' },
-    { name: 'Pickleball', href: '#pickleball' },
-    { name: 'Events', href: '#events' },
-    { name: 'Programs', href: '#programs' },
-    { name: 'Membership', href: '#membership' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'Home', href: '/' },
+    { name: 'Facilities', href: '/#facilities' },
+    { name: 'Tennis', href: '/#tennis' },
+    { name: 'Padel', href: '/#padel' },
+    { name: 'Pickleball', href: '/#pickleball' },
+    { name: 'Coaching', href: '/coaching' },
+    { name: 'Membership', href: '/#membership' },
+    { name: 'Contact', href: '/#contact' },
   ];
 
   const handleLinkClick = (name: string) => {
@@ -28,26 +35,26 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-24">
           <div className="flex items-center gap-8">
-            <a href="#" className="flex items-center">
+            <Link to="/" className="flex items-center">
               <img 
                 src="https://i.postimg.cc/50Jt9Ptj/TTC-Logo-New.jpg" 
                 alt="Torquay Tennis Club Logo" 
                 className="h-16 w-auto object-contain"
                 referrerPolicy="no-referrer"
               />
-            </a>
+            </Link>
 
             {/* Desktop Menu Links */}
             <div className="hidden md:flex items-center gap-8">
               {navLinks.map((link) => (
-                <a
+                <Link
                   key={link.name}
-                  href={link.href}
+                  to={link.href}
                   onClick={() => handleLinkClick(link.name)}
                   className={`${activeLink === link.name ? 'text-emerald-600' : 'text-gray-600'} hover:text-emerald-600 font-medium transition-colors whitespace-nowrap`}
                 >
                   {link.name}
-                </a>
+                </Link>
               ))}
               <a
                 href="#membership"
@@ -83,9 +90,9 @@ export default function Navbar() {
           >
             <div className="px-4 pt-2 pb-6 space-y-1">
               {navLinks.map((link) => (
-                <a
+                <Link
                   key={link.name}
-                  href={link.href}
+                  to={link.href}
                   onClick={() => handleLinkClick(link.name)}
                   className={`block px-3 py-3 text-base font-medium rounded-lg ${
                     activeLink === link.name 
@@ -94,7 +101,7 @@ export default function Navbar() {
                   }`}
                 >
                   {link.name}
-                </a>
+                </Link>
               ))}
               <div className="pt-4">
                 <a
