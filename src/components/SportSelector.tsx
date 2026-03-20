@@ -12,7 +12,7 @@ const SportSelector = () => {
     {
       title: 'Padel',
       desc: 'Experience the fastest growing sport',
-      image: 'https://i.postimg.cc/8JjS3fmj/how-to-serve-in-padel-jpg.webp', 
+      image: 'https://i.postimg.cc/bNLDfLbL/Padel-Player.jpg', 
       link: '#other-sports',
       color: 'bg-emerald-500',
       featured: true // Highlighting Padel

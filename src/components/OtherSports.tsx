@@ -19,7 +19,7 @@ export default function OtherSports() {
     {
       name: 'Padel',
       description: 'Experience the fastest growing sport in the world. Padel is a fun, highly addictive doubles game played on an enclosed court. It is easy to learn and perfect for all ages and abilities.',
-      image: 'https://i.postimg.cc/8JjS3fmj/how-to-serve-in-padel-jpg.webp',
+      image: 'https://i.postimg.cc/bNLDfLbL/Padel-Player.jpg',
       fallbackImage: 'https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?q=80&w=2070&auto=format&fit=crop',
       features: ['3 Panoramic Courts', 'Equipment Hire', 'Introductory Sessions', 'Social Mixers'],
       dotColor: 'bg-emerald-500',
