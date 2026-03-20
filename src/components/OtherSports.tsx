@@ -30,7 +30,7 @@ export default function OtherSports() {
     {
       name: 'Pickleball',
       description: 'Join the Pickleball craze! Combining elements of tennis, badminton, and ping-pong, it is a fast-paced, beginner-friendly game that is taking the world by storm.',
-      image: 'https://i.postimg.cc/dkpYKQ59/Adobe-Stock-667173382-scaled-jpeg.webp',
+      image: 'https://i.postimg.cc/15Mn1M6c/Pickleball-Padel.jpg',
       fallbackImage: 'https://images.unsplash.com/photo-1613918108466-292b78a8ef95?q=80&w=2070&auto=format&fit=crop',
       features: ['6 Dedicated Courts', 'Beginner Friendly', 'Weekly Social Sessions', 'All Ages Welcome'],
       dotColor: 'bg-teal-500',

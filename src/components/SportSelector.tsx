@@ -20,7 +20,7 @@ const SportSelector = () => {
     {
       title: 'Pickleball',
       desc: 'Social, fast-paced, and fun',
-      image: 'https://i.postimg.cc/dkpYKQ59/Adobe-Stock-667173382-scaled-jpeg.webp',
+      image: 'https://i.postimg.cc/15Mn1M6c/Pickleball-Padel.jpg',
       link: '#other-sports',
       color: 'bg-teal-500'
     }
