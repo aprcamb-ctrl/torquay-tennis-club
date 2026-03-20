@@ -71,9 +71,9 @@ export default function Footer() {
             <h3 className="text-lg font-bold mb-6 text-emerald-400 uppercase tracking-wider text-sm">Official Club Sponsor</h3>
             <div className="bg-white/5 rounded-xl p-6 border border-gray-800 backdrop-blur-sm group hover:border-emerald-500/30 transition-all duration-300">
               <img
-                src="/images/sponsor-logo.png"
-                alt="Official Club Sponsor"
-                className="w-full h-auto object-contain brightness-90 group-hover:brightness-100 transition-all"
+                src="https://i.postimg.cc/FFbg12wZ/Pro-Direct.png"
+                alt="Pro-Direct - Official Club Sponsor"
+                className="w-full h-auto object-contain brightness-90 group-hover:brightness-100 transition-all p-2"
               />
             </div>
           </div>
