@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'motion/react';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [visitedLinks, setVisitedLinks] = useState<string[]>(['Home']);
+  const [activeLink, setActiveLink] = useState('Home');
 
   const navLinks = [
     { name: 'Home', href: '#' },
@@ -19,9 +19,7 @@ export default function Navbar() {
   ];
 
   const handleLinkClick = (name: string) => {
-    if (!visitedLinks.includes(name)) {
-      setVisitedLinks(prev => [...prev, name]);
-    }
+    setActiveLink(name);
     setIsOpen(false);
   };
 
@@ -46,7 +44,7 @@ export default function Navbar() {
                   key={link.name}
                   href={link.href}
                   onClick={() => handleLinkClick(link.name)}
-                  className={`${visitedLinks.includes(link.name) ? 'text-emerald-600' : 'text-gray-600'} hover:text-emerald-600 font-medium transition-colors whitespace-nowrap`}
+                  className={`${activeLink === link.name ? 'text-emerald-600' : 'text-gray-600'} hover:text-emerald-600 font-medium transition-colors whitespace-nowrap`}
                 >
                   {link.name}
                 </a>
@@ -90,7 +88,7 @@ export default function Navbar() {
                   href={link.href}
                   onClick={() => handleLinkClick(link.name)}
                   className={`block px-3 py-3 text-base font-medium rounded-lg ${
-                    visitedLinks.includes(link.name) 
+                    activeLink === link.name 
                       ? 'text-emerald-600 bg-emerald-50/50' 
                       : 'text-gray-700 hover:text-emerald-600 hover:bg-emerald-50'
                   }`}
