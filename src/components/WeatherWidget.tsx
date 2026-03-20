@@ -24,25 +24,43 @@ export default function WeatherWidget() {
       const timeoutId = setTimeout(() => controller.abort(), 5000);
 
       try {
-        const response = await fetch('https://wttr.in/TQ2+5HP?format=j1', { signal: controller.signal });
+        // Open-Meteo is more reliable and doesn't require an API key
+        // Lat/Lon for Torquay (TQ2 5HP) is approx 50.48, -3.53
+        const response = await fetch(
+          'https://api.open-meteo.com/v1/forecast?latitude=50.48&longitude=-3.53&current=temperature_2m,precipitation,weather_code&timezone=auto',
+          { signal: controller.signal }
+        );
         if (!response.ok) throw new Error('Network response was not ok');
         
         const data = await response.json();
-        const current = data?.current_condition?.[0];
+        const current = data?.current;
         
         if (!current) throw new Error('Weather data format unexpected');
 
+        const weatherCodes: { [key: number]: string } = {
+          0: 'Clear sky',
+          1: 'Mainly clear',
+          2: 'Partly cloudy',
+          3: 'Overcast',
+          45: 'Fog', 48: 'Fog',
+          51: 'Drizzle', 53: 'Drizzle', 55: 'Drizzle',
+          61: 'Rain', 63: 'Rain', 65: 'Rain',
+          71: 'Snow fall', 73: 'Snow fall', 75: 'Snow fall',
+          80: 'Rain showers', 81: 'Rain showers', 82: 'Rain showers',
+          95: 'Thunderstorm', 96: 'Thunderstorm', 99: 'Thunderstorm'
+        };
+
         setWeather({
-          temp: current.temp_C || '12',
-          desc: current.weatherDesc?.[0]?.value || 'Clear',
-          icon: current.weatherCode || '113'
+          temp: Math.round(current.temperature_2m).toString(),
+          desc: weatherCodes[current.weather_code] || 'Clear',
+          icon: current.weather_code.toString()
         });
         
-        const precip = parseFloat(current.precipMM || '0');
+        const precip = current.precipitation || 0;
         setIsPlayable(precip < 0.5);
       } catch (error) {
         console.warn('Weather fetch failed, using fallback:', error);
-        setWeather({ temp: '12', desc: 'Clear', icon: '113' });
+        setWeather({ temp: '12', desc: 'Clear', icon: '0' });
         setIsPlayable(true);
       } finally {
         clearTimeout(timeoutId);
