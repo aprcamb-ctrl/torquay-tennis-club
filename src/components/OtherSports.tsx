@@ -99,20 +99,20 @@ export default function OtherSports() {
                     href={sport.link || "#contact"}
                     target={sport.link ? "_blank" : "_self"}
                     rel={sport.link ? "noopener noreferrer" : ""}
-                    className={`inline-flex items-center gap-2 ${sport.textColor} font-semibold ${sport.hoverTextColor} transition-colors`}
+                    className="inline-flex items-center gap-2 bg-emerald-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-100 group/btn"
                   >
                     Book a {sport.name} Court
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" />
                   </a>
                   {sport.secondaryLink && (
                     <a
                       href={sport.secondaryLink.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`inline-flex items-center gap-2 ${sport.textColor} font-semibold ${sport.hoverTextColor} transition-colors`}
+                      className="inline-flex items-center gap-2 bg-emerald-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-100 group/btn"
                     >
                       {sport.secondaryLink.label}
-                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                      <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" />
                     </a>
                   )}
                 </div>
