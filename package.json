@@ -10,7 +10,7 @@
     "clean": "rm -rf dist",
     "lint": "tsc --noEmit",
     "server": "tsx server.ts",
-    "subscribers": "sqlite3 subscribers.db 'SELECT * FROM subscribers;'"
+    "subscribers": "echo '--- NEWSLETTER ---' && sqlite3 subscribers.db 'SELECT * FROM subscribers;' && echo '\n--- CLUBHOUSE BOOKINGS ---' && sqlite3 subscribers.db 'SELECT * FROM clubhouse_bookings;'"
   },
   "dependencies": {
     "@google/genai": "^1.29.0",

@@ -1,7 +1,10 @@
 import { motion } from 'motion/react';
 import { CheckCircle2, ArrowRight } from 'lucide-react';
+import { useState } from 'react';
+import ClubhouseBookingModal from './ClubhouseBookingModal';
 
 export default function Facilities() {
+  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
   const facilities = [
     {
       title: 'Championship Courts',
@@ -76,15 +79,25 @@ export default function Facilities() {
                 
                 {facility.link && (
                   <div className="mt-8 pt-8 border-t border-gray-200">
-                    <a
-                      href={facility.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 bg-emerald-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-100 group"
-                    >
-                      {facility.buttonText}
-                      <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                    </a>
+                    {facility.title === 'Modern Clubhouse' ? (
+                      <button
+                        onClick={() => setIsBookingModalOpen(true)}
+                        className="inline-flex items-center gap-2 bg-emerald-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-100 group"
+                      >
+                        {facility.buttonText}
+                        <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                      </button>
+                    ) : (
+                      <a
+                        href={facility.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 bg-emerald-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-100 group"
+                      >
+                        {facility.buttonText}
+                        <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                      </a>
+                    )}
                   </div>
                 )}
               </motion.div>
@@ -92,6 +105,10 @@ export default function Facilities() {
           ))}
         </div>
       </div>
+      <ClubhouseBookingModal 
+        isOpen={isBookingModalOpen} 
+        onClose={() => setIsBookingModalOpen(false)} 
+      />
     </section>
   );
 }
