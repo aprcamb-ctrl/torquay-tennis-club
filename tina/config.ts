@@ -54,6 +54,34 @@ export default defineConfig({
           },
         ],
       },
+      {
+        name: "global",
+        label: "Global Settings",
+        path: "content/global",
+        format: "json",
+        ui: {
+          global: true,
+        },
+        fields: [
+          {
+            type: "object",
+            list: true,
+            name: "sports",
+            label: "Sport Quick Links",
+            ui: {
+              itemProps: (item) => {
+                return { label: item?.title || "New Sport Link" };
+              },
+            },
+            fields: [
+              { type: "string", name: "title", label: "Sport Title" },
+              { type: "image", name: "image", label: "Background Image" },
+              { type: "string", name: "link", label: "Page Link" },
+              { type: "boolean", name: "featured", label: "Highlight as Popular?" }
+            ]
+          }
+        ]
+      },
     ],
   },
 });

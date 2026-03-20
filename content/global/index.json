@@ -1,0 +1,22 @@
+{
+  "sports": [
+    {
+      "title": "Tennis",
+      "image": "https://images.unsplash.com/photo-1595435063823-ff48c4a03421?q=80&w=2000&auto=format&fit=crop",
+      "link": "#facilities",
+      "featured": false
+    },
+    {
+      "title": "Padel",
+      "image": "https://i.postimg.cc/8JjS3fmj/how-to-serve-in-padel-jpg.webp",
+      "link": "#other-sports",
+      "featured": true
+    },
+    {
+      "title": "Pickleball",
+      "image": "https://i.postimg.cc/dkpYKQ59/Adobe-Stock-667173382-scaled-jpeg.webp",
+      "link": "#other-sports",
+      "featured": false
+    }
+  ]
+}
