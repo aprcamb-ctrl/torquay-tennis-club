@@ -93,7 +93,7 @@ export default function WeatherWidget() {
     <motion.div
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
-      className="fixed top-28 left-6 z-40 flex items-center gap-3 bg-white/90 backdrop-blur-md border border-gray-100 p-2 pr-4 rounded-full shadow-lg"
+      className="fixed bottom-6 left-6 z-40 flex items-center gap-3 bg-white/90 backdrop-blur-md border border-gray-100 p-2 pr-4 rounded-full shadow-lg"
     >
       {/* Weather Part */}
       <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-50 rounded-full border border-gray-100">

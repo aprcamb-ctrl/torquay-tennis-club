@@ -5,14 +5,14 @@ const SportSelector = () => {
     {
       title: 'Tennis',
       desc: '12 Courts (9 Outdoor, 3 Indoor)',
-      image: 'https://images.unsplash.com/photo-1595435063823-ff48c4a03421?q=80&w=2000&auto=format&fit=crop',
+      image: 'https://i.postimg.cc/SNV2bV8C/Tennis-Player.jpg',
       link: '#facilities',
       color: 'bg-emerald-600'
     },
     {
       title: 'Padel',
       desc: 'Experience the fastest growing sport',
-      image: 'https://i.postimg.cc/bNLDfLbL/Padel-Player.jpg', 
+      image: 'https://i.postimg.cc/bNLDfLbL/Padel-Player.jpg',
       link: '#other-sports',
       color: 'bg-emerald-500',
       featured: true // Highlighting Padel
@@ -35,8 +35,8 @@ const SportSelector = () => {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {sports.map((sport, index) => (
-            <motion.a 
-              key={sport.title} 
+            <motion.a
+              key={sport.title}
               href={sport.link}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -45,12 +45,12 @@ const SportSelector = () => {
               className="group relative overflow-hidden rounded-3xl shadow-xl cursor-pointer transition-all duration-500 hover:-translate-y-2 block aspect-[4/5]"
             >
               {/* Background Image with Overlay */}
-              <div 
+              <div
                 className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
                 style={{ backgroundImage: `url(${sport.image})` }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent group-hover:via-black/10 transition-colors" />
-              
+
               {/* Content */}
               <div className="absolute bottom-0 left-0 p-8 text-white w-full">
                 {sport.featured && (
