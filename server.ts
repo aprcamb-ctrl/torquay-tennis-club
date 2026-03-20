@@ -11,6 +11,12 @@ const port = 3001;
 
 app.use(express.json());
 
+// Request logging middleware
+app.use((req, res, next) => {
+  console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
+  next();
+});
+
 // Initialize database
 const db = new Database('subscribers.db');
 
@@ -67,7 +73,7 @@ app.post('/api/book-clubhouse', (req, res) => {
       INSERT INTO clubhouse_bookings (name, email, phone, date, guests, requirements)
       VALUES (?, ?, ?, ?, ?, ?)
     `);
-    stmt.run(name, email, phone, date, guests, requirements);
+    stmt.run(name, email, phone, date, Number(guests), requirements);
     
     console.log('--- NEW CLUBHOUSE BOOKING ENQUIRY ---');
     console.log(`To: chairman@torquaytennisclub.co.uk`);

@@ -46,10 +46,12 @@ export default function ClubhouseBookingModal({ isOpen, onClose }: ClubhouseBook
           });
         }, 2000);
       } else {
+        const errorData = await response.json().catch(() => ({}));
+        console.error('Booking submission failed:', response.status, errorData);
         setStatus('error');
       }
     } catch (error) {
-      console.error('Booking submission error:', error);
+      console.error('Booking submission network/other error:', error);
       setStatus('error');
     }
   };
