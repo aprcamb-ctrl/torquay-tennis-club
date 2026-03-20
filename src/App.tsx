@@ -16,6 +16,7 @@ import Footer from './components/Footer';
 import ChatWidget from './components/ChatWidget';
 import EventPopup from './components/EventPopup';
 import WeatherWidget from './components/WeatherWidget';
+import SportSelector from './components/SportSelector';
 import { Analytics } from '@vercel/analytics/react';
 
 export default function App() {
@@ -24,6 +25,7 @@ export default function App() {
       <Navbar />
       <main>
         <Hero />
+        <SportSelector />
         <Facilities />
         <OtherSports />
         <Events />
