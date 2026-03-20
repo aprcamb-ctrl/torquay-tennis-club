@@ -7,3 +7,6 @@ coverage/
 .env*
 !.env.example
 subscribers.db
+
+node_modules
+.env
