@@ -12,7 +12,8 @@ export default function Facilities() {
       image: 'https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?q=80&w=2070&auto=format&fit=crop',
       features: ['4 Artificial Clay Courts', '4 Hard Courts', 'LED Floodlights', '3 Indoor Tennis Courts'],
       link: 'https://auth.clubspark.uk/account/signin?ReturnUrl=%2fissue%2fwsfed%3fwa%3dwsignin1.0%26wtrealm%3dhttps%253a%252f%252fclubspark.lta.org.uk%252f%26wctx%3drm%253d0%2526id%253d0%2526ru%253dhttps%25253a%25252f%25252fclubspark.lta.org.uk%25252fTorquayTennisClubLtd%25252fBooking%25252fBookByDate%26wct%3d2020-06-02T16%253a58%253a45Z%26prealm%3dhttps%253a%252f%252fclubspark.lta.org.uk%252f%26proot%3dhttps%253a%252f%252fclubspark.lta.org.uk%252f%26paroot%3dhttps%253a%252f%252fclubspark.lta.org.uk%252fTorquayTennisClubLtd%26source%3dTorquayTennisClubLtd%26name%3dTorquay%2bTennis%2bClub%2bLimited%26nologo%3d0&wa=wsignin1.0&wtrealm=https%3a%2f%2fclubspark.lta.org.uk%2f&wctx=rm%3d0%26id%3d0%26ru%3dhttps%253a%252f%252fclubspark.lta.org.uk%252fTorquayTennisClubLtd%252fBooking%252fBookByDate&wct=2020-06-02T16%3a58%3a45Z&prealm=https%3a%2f%2fclubspark.lta.org.uk%2f&proot=https%3a%2f%2fclubspark.lta.org.uk%2f&paroot=https%3a%2f%2fclubspark.lta.org.uk%2fTorquayTennisClubLtd&source=TorquayTennisClubLtd&name=Torquay+Tennis+Club+Limited&nologo=0',
-      buttonText: 'Book a Tennis Court'
+      buttonText: 'Book a Tennis Court',
+      id: 'tennis'
     },
     {
       title: 'Modern Clubhouse',
@@ -39,7 +40,7 @@ export default function Facilities() {
 
         <div className="space-y-24">
           {facilities.map((facility, index) => (
-            <div key={facility.title} className={`flex flex-col lg:flex-row gap-12 items-center ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
+            <div key={facility.title} id={(facility as any).id} className={`flex flex-col lg:flex-row gap-12 items-center ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
               <motion.div
                 initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
                 whileInView={{ opacity: 1, x: 0 }}

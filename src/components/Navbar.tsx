@@ -9,6 +9,7 @@ export default function Navbar() {
   const navLinks = [
     { name: 'Home', href: '#' },
     { name: 'Facilities', href: '#facilities' },
+    { name: 'Tennis', href: '#tennis' },
     { name: 'Padel', href: '#padel' },
     { name: 'Pickleball', href: '#pickleball' },
     { name: 'Events', href: '#events' },
