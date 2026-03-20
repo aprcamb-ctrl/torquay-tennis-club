@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'motion/react';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [visitedLinks, setVisitedLinks] = useState<string[]>(['Home']);
 
   const navLinks = [
     { name: 'Home', href: '#' },
@@ -15,6 +16,13 @@ export default function Navbar() {
     { name: 'Membership', href: '#membership' },
     { name: 'Contact', href: '#contact' },
   ];
+
+  const handleLinkClick = (name: string) => {
+    if (!visitedLinks.includes(name)) {
+      setVisitedLinks(prev => [...prev, name]);
+    }
+    setIsOpen(false);
+  };
 
   return (
     <nav className="fixed w-full z-50 bg-white/90 backdrop-blur-md border-b border-gray-100">
@@ -36,7 +44,8 @@ export default function Navbar() {
                 <a
                   key={link.name}
                   href={link.href}
-                  className="text-gray-600 hover:text-emerald-600 font-medium transition-colors whitespace-nowrap"
+                  onClick={() => handleLinkClick(link.name)}
+                  className={`${visitedLinks.includes(link.name) ? 'text-emerald-600' : 'text-gray-600'} hover:text-emerald-600 font-medium transition-colors whitespace-nowrap`}
                 >
                   {link.name}
                 </a>
@@ -78,8 +87,12 @@ export default function Navbar() {
                 <a
                   key={link.name}
                   href={link.href}
-                  onClick={() => setIsOpen(false)}
-                  className="block px-3 py-3 text-base font-medium text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg"
+                  onClick={() => handleLinkClick(link.name)}
+                  className={`block px-3 py-3 text-base font-medium rounded-lg ${
+                    visitedLinks.includes(link.name) 
+                      ? 'text-emerald-600 bg-emerald-50/50' 
+                      : 'text-gray-700 hover:text-emerald-600 hover:bg-emerald-50'
+                  }`}
                 >
                   {link.name}
                 </a>
