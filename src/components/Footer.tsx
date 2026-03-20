@@ -57,7 +57,9 @@ export default function Footer() {
             <ul className="space-y-4">
               <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Home</a></li>
               <li><a href="#facilities" className="text-gray-400 hover:text-white transition-colors">Facilities</a></li>
-              <li><a href="#other-sports" className="text-gray-400 hover:text-white transition-colors">Padel &amp; Pickleball</a></li>
+              <li><a href="#tennis" className="text-gray-400 hover:text-white transition-colors">Tennis</a></li>
+              <li><a href="#padel" className="text-gray-400 hover:text-white transition-colors">Padel</a></li>
+              <li><a href="#pickleball" className="text-gray-400 hover:text-white transition-colors">Pickleball</a></li>
               <li><a href="#events" className="text-gray-400 hover:text-white transition-colors">Events</a></li>
               <li><a href="#programs" className="text-gray-400 hover:text-white transition-colors">Programs</a></li>
               <li><a href="#membership" className="text-gray-400 hover:text-white transition-colors">Membership</a></li>
