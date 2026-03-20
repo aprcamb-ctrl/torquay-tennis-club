@@ -8,13 +8,16 @@ export default function Facilities() {
       description: 'Play on our 8 meticulously maintained courts, including 4 artificial clay and 4 hard courts, all equipped with LED floodlights.',
       image: 'https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?q=80&w=2070&auto=format&fit=crop',
       features: ['4 Artificial Clay Courts', '4 Hard Courts', 'LED Floodlights', '3 Indoor Tennis Courts'],
-      link: 'https://auth.clubspark.uk/account/signin?ReturnUrl=%2fissue%2fwsfed%3fwa%3dwsignin1.0%26wtrealm%3dhttps%253a%252f%252fclubspark.lta.org.uk%252f%26wctx%3drm%253d0%2526id%253d0%2526ru%253dhttps%25253a%25252f%25252fclubspark.lta.org.uk%25252fTorquayTennisClubLtd%25252fBooking%25252fBookByDate%26wct%3d2020-06-02T16%253a58%253a45Z%26prealm%3dhttps%253a%252f%252fclubspark.lta.org.uk%252f%26proot%3dhttps%253a%252f%252fclubspark.lta.org.uk%252f%26paroot%3dhttps%253a%252f%252fclubspark.lta.org.uk%252fTorquayTennisClubLtd%26source%3dTorquayTennisClubLtd%26name%3dTorquay%2bTennis%2bClub%2bLimited%26nologo%3d0&wa=wsignin1.0&wtrealm=https%3a%2f%2fclubspark.lta.org.uk%2f&wctx=rm%3d0%26id%3d0%26ru%3dhttps%253a%252f%252fclubspark.lta.org.uk%252fTorquayTennisClubLtd%252fBooking%252fBookByDate&wct=2020-06-02T16%3a58%3a45Z&prealm=https%3a%2f%2fclubspark.lta.org.uk%2f&proot=https%3a%2f%2fclubspark.lta.org.uk%2f&paroot=https%3a%2f%2fclubspark.lta.org.uk%2fTorquayTennisClubLtd&source=TorquayTennisClubLtd&name=Torquay+Tennis+Club+Limited&nologo=0'
+      link: 'https://auth.clubspark.uk/account/signin?ReturnUrl=%2fissue%2fwsfed%3fwa%3dwsignin1.0%26wtrealm%3dhttps%253a%252f%252fclubspark.lta.org.uk%252f%26wctx%3drm%253d0%2526id%253d0%2526ru%253dhttps%25253a%25252f%25252fclubspark.lta.org.uk%25252fTorquayTennisClubLtd%25252fBooking%25252fBookByDate%26wct%3d2020-06-02T16%253a58%253a45Z%26prealm%3dhttps%253a%252f%252fclubspark.lta.org.uk%252f%26proot%3dhttps%253a%252f%252fclubspark.lta.org.uk%252f%26paroot%3dhttps%253a%252f%252fclubspark.lta.org.uk%252fTorquayTennisClubLtd%26source%3dTorquayTennisClubLtd%26name%3dTorquay%2bTennis%2bClub%2bLimited%26nologo%3d0&wa=wsignin1.0&wtrealm=https%3a%2f%2fclubspark.lta.org.uk%2f&wctx=rm%3d0%26id%3d0%26ru%3dhttps%253a%252f%252fclubspark.lta.org.uk%252fTorquayTennisClubLtd%252fBooking%252fBookByDate&wct=2020-06-02T16%3a58%3a45Z&prealm=https%3a%2f%2fclubspark.lta.org.uk%2f&proot=https%3a%2f%2fclubspark.lta.org.uk%2f&paroot=https%3a%2f%2fclubspark.lta.org.uk%2fTorquayTennisClubLtd&source=TorquayTennisClubLtd&name=Torquay+Tennis+Club+Limited&nologo=0',
+      buttonText: 'Book a Tennis Court'
     },
     {
       title: 'Modern Clubhouse',
       description: 'Relax after your match in our newly renovated clubhouse featuring a fully licensed bar, cafe, and comfortable viewing areas.',
       image: 'https://images.unsplash.com/photo-1542144612-1b3641ec3459?q=80&w=2070&auto=format&fit=crop',
-      features: ['Licensed Bar & Cafe', 'Viewing Balcony', 'Pro Shop', 'Changing Rooms']
+      features: ['Licensed Bar & Cafe', 'Viewing Balcony', 'Pro Shop', 'Private Function Hire', 'Changing Rooms'],
+      link: '#contact',
+      buttonText: 'Book Now'
     }
   ];
 
@@ -79,7 +82,7 @@ export default function Facilities() {
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-2 bg-emerald-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-100 group"
                     >
-                      Book a Tennis Court
+                      {facility.buttonText}
                       <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                     </a>
                   </div>
