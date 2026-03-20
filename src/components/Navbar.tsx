@@ -8,7 +8,8 @@ export default function Navbar() {
   const navLinks = [
     { name: 'Home', href: '#' },
     { name: 'Facilities', href: '#facilities' },
-    { name: 'Padel & Pickleball', href: '#other-sports' },
+    { name: 'Padel', href: '#padel' },
+    { name: 'Pickleball', href: '#pickleball' },
     { name: 'Events', href: '#events' },
     { name: 'Programs', href: '#programs' },
     { name: 'Membership', href: '#membership' },

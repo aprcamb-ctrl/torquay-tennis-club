@@ -12,6 +12,7 @@ export default function OtherSports() {
     textColor: string;
     hoverTextColor: string;
     link?: string;
+    id: string;
     secondaryLink?: { url: string; label: string; };
   }
 
@@ -25,7 +26,8 @@ export default function OtherSports() {
       dotColor: 'bg-emerald-500',
       textColor: 'text-emerald-600',
       hoverTextColor: 'hover:text-emerald-700',
-      link: 'https://playtomic.com/clubs/torquay-tennis-club'
+      link: 'https://playtomic.com/clubs/torquay-tennis-club',
+      id: 'padel'
     },
     {
       name: 'Pickleball',
@@ -37,6 +39,7 @@ export default function OtherSports() {
       textColor: 'text-teal-600',
       hoverTextColor: 'hover:text-teal-700',
       link: 'https://auth.clubspark.uk/account/signin?ReturnUrl=%2fissue%2fwsfed%3fwa%3dwsignin1.0%26wtrealm%3dhttps%253a%252f%252fclubspark.lta.org.uk%252f%26wctx%3drm%253d0%2526id%253d0%2526ru%253dhttps%25253a%25252f%25252fclubspark.lta.org.uk%25252fTorquayTennisClubLtd%25252fBooking%25252fBookByDate%26wct%3d2020-06-02T16%253a58%253a45Z%26prealm%3dhttps%253a%252f%252fclubspark.lta.org.uk%252f%26proot%3dhttps%253a%252f%252fclubspark.lta.org.uk%252f%26paroot%3dhttps%253a%252f%252fclubspark.lta.org.uk%252fTorquayTennisClubLtd%26source%3dTorquayTennisClubLtd%26name%3dTorquay%2bTennis%2bClub%2bLimited%26nologo%3d0&wa=wsignin1.0&wtrealm=https%3a%2f%2fclubspark.lta.org.uk%2f&wctx=rm%3d0%26id%3d0%26ru%3dhttps%253a%252f%252fclubspark.lta.org.uk%252fTorquayTennisClubLtd%252fBooking%252fBookByDate&wct=2020-06-02T16%3a58%3a45Z&prealm=https%3a%2f%2fclubspark.lta.org.uk%2f&proot=https%3a%2f%2fclubspark.lta.org.uk%2f&paroot=https%3a%2f%2fclubspark.lta.org.uk%2fTorquayTennisClubLtd&source=TorquayTennisClubLtd&name=Torquay+Tennis+Club+Limited&nologo=0',
+      id: 'pickleball',
       secondaryLink: { url: 'https://www.globalpickleball.network', label: 'Book a Social Session' }
     }
   ];
@@ -58,6 +61,7 @@ export default function OtherSports() {
           {sports.map((sport, index) => (
             <motion.div
               key={sport.name}
+              id={sport.id}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
