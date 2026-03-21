@@ -14,9 +14,17 @@ export default function Coaching() {
         setCoachingData(res.data.coaching);
         setLoading(false);
       })
-      .catch((err) => {
-        console.error('Error fetching coaching data:', err);
-        setLoading(false);
+      .catch(async (err) => {
+        console.error('Tina fetch failed, falling back to static data:', err);
+        try {
+          // Fallback to static JSON for production environments without Tina Cloud
+          const staticData = await import('../../content/pages/coaching.json');
+          setCoachingData(staticData.default || staticData);
+          setLoading(false);
+        } catch (staticErr) {
+          console.error('Static fallback failed:', staticErr);
+          setLoading(false);
+        }
       });
   }, []);
 
