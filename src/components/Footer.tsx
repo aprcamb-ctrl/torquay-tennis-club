@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { MapPin, Phone, Mail, Facebook, Instagram } from 'lucide-react';
+import { MapPin, Phone, Mail, Facebook, Instagram, ChevronDown } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
 
 export default function Footer() {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
   return (
     <footer id="contact" className="bg-gray-900 text-white pt-24 pb-12 border-t border-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -31,9 +34,33 @@ export default function Footer() {
             <ul className="space-y-4">
               <li><Link to="/" className="text-gray-400 hover:text-emerald-400 transition-colors">Home</Link></li>
               <li><Link to="/#facilities" className="text-gray-400 hover:text-emerald-400 transition-colors">Facilities</Link></li>
-              <li><Link to="/#tennis" className="text-gray-400 hover:text-emerald-400 transition-colors">Tennis</Link></li>
-              <li><Link to="/#padel" className="text-gray-400 hover:text-emerald-400 transition-colors">Padel</Link></li>
-              <li><Link to="/#pickleball" className="text-gray-400 hover:text-emerald-400 transition-colors">Pickleball</Link></li>
+              
+              <li>
+                <button 
+                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                  className="flex items-center gap-1 text-gray-400 hover:text-emerald-400 transition-colors w-full text-left"
+                >
+                  Sport
+                  <ChevronDown className={`w-4 h-4 transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`} />
+                </button>
+                <AnimatePresence>
+                  {isDropdownOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      className="overflow-hidden"
+                    >
+                      <ul className="pl-4 mt-3 space-y-3 border-l border-gray-800 ml-1">
+                        <li><Link to="/#tennis" className="text-gray-500 hover:text-emerald-400 transition-colors block">Tennis</Link></li>
+                        <li><Link to="/#padel" className="text-gray-500 hover:text-emerald-400 transition-colors block">Padel</Link></li>
+                        <li><Link to="/#pickleball" className="text-gray-500 hover:text-emerald-400 transition-colors block">Pickleball</Link></li>
+                      </ul>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </li>
+
               <li><Link to="/coaching" className="text-gray-400 hover:text-emerald-400 transition-colors">Coaching</Link></li>
               <li><Link to="/#membership" className="text-gray-400 hover:text-emerald-400 transition-colors">Membership</Link></li>
             </ul>
