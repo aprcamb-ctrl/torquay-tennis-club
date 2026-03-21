@@ -25,7 +25,8 @@ export default function Navbar() {
     { name: 'Events', href: '/events' },
     { name: 'Coaching', href: '/coaching' },
     { name: 'Membership', href: '/#membership' },
-    { name: "Sponsors' Guidelines", href: '/sponsors-guidelines' },
+    { name: 'Sponsors', href: '/sponsors' },
+    { name: 'Guidelines', href: '/guidelines' },
     { name: 'Contact', href: '/#contact' },
   ];
 
