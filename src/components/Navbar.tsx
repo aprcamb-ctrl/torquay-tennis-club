@@ -22,6 +22,7 @@ export default function Navbar() {
         { name: 'Pickleball', href: '/#pickleball' },
       ]
     },
+    { name: 'Events', href: '/events' },
     { name: 'Coaching', href: '/coaching' },
     { name: 'Membership', href: '/#membership' },
     { name: 'Contact', href: '/#contact' },

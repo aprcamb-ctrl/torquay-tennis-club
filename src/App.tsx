@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Coaching from './pages/Coaching';
+import Events from './pages/Events';
 import Footer from './components/Footer';
 import ChatWidget from './components/ChatWidget';
 import EventPopup from './components/EventPopup';
@@ -60,6 +61,7 @@ export default function App() {
         <main>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/events" element={<Events />} />
             <Route path="/coaching" element={<Coaching />} />
           </Routes>
         </main>

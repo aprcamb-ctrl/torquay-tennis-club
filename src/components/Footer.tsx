@@ -61,6 +61,7 @@ export default function Footer() {
                 </AnimatePresence>
               </li>
 
+              <li><Link to="/events" className="text-gray-400 hover:text-emerald-400 transition-colors">Events</Link></li>
               <li><Link to="/coaching" className="text-gray-400 hover:text-emerald-400 transition-colors">Coaching</Link></li>
               <li><Link to="/#membership" className="text-gray-400 hover:text-emerald-400 transition-colors">Membership</Link></li>
             </ul>
