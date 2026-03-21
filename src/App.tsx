@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Coaching from './pages/Coaching';
 import Events from './pages/Events';
 import Sponsors from './pages/Sponsors';
+import Guidelines from './pages/Guidelines';
 import Footer from './components/Footer';
 import ChatWidget from './components/ChatWidget';
 import EventPopup from './components/EventPopup';
@@ -65,6 +66,7 @@ export default function App() {
             <Route path="/events" element={<Events />} />
             <Route path="/coaching" element={<Coaching />} />
             <Route path="/sponsors" element={<Sponsors />} />
+            <Route path="/guidelines" element={<Guidelines />} />
           </Routes>
         </main>
         <Footer />
