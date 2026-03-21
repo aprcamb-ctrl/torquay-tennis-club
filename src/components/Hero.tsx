@@ -1,5 +1,6 @@
 import { motion } from 'motion/react';
 import { ArrowRight, Users, Trophy, LayoutGrid } from 'lucide-react';
+import StatsSection from './StatsSection';
 
 export default function Hero() {
   return (
@@ -90,22 +91,9 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.5 }}
-          className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-gray-100 pt-10"
+          className="mt-20 grid grid-cols-2 md:grid-cols-5 gap-8 border-t border-gray-100 pt-10"
         >
-          {[
-            { label: 'Premium Courts', value: '8', icon: Trophy },
-            { label: 'Active Members', value: '700+', icon: Users },
-            { label: 'Padel Courts', value: '3', icon: LayoutGrid },
-            { label: 'Outdoor Pickleball Courts', value: '2', icon: LayoutGrid },
-          ].map((stat, i) => (
-            <div key={i} className="flex flex-col items-center">
-              <div className="w-12 h-12 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-600 mb-4">
-                <stat.icon className="w-6 h-6" />
-              </div>
-              <div className="text-3xl font-bold text-gray-900 mb-1">{stat.value}</div>
-              <div className="text-sm text-gray-500 font-medium">{stat.label}</div>
-            </div>
-          ))}
+          <StatsSection />
         </motion.div>
       </div>
     </div>

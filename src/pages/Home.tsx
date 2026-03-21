@@ -1,5 +1,4 @@
 import Hero from '../components/Hero';
-import StatsSection from '../components/StatsSection';
 import Facilities from '../components/Facilities';
 import OtherSports from '../components/OtherSports';
 import Membership from '../components/Membership';
@@ -10,7 +9,6 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <StatsSection />
       <SportSelector />
       <Facilities />
       <OtherSports />
@@ -19,3 +17,4 @@ export default function Home() {
     </>
   );
 }
+

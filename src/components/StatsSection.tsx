@@ -44,11 +44,11 @@ const StatCard = ({ label, target, suffix = '' }: StatProps) => {
   }, [target]);
 
   return (
-    <div ref={counterRef} className="stat-card">
-      <h2 className="text-4xl md:text-5xl font-bold text-yellow-400 mb-2">
+    <div ref={counterRef} className="flex flex-col items-center stat-card">
+      <div className="text-3xl font-bold text-gray-900 mb-1">
         <span className="counter">{count}</span>{suffix}
-      </h2>
-      <p className="text-sm uppercase tracking-wider font-semibold">{label}</p>
+      </div>
+      <div className="text-sm text-gray-500 font-medium">{label}</div>
     </div>
   );
 };
@@ -63,14 +63,10 @@ export default function StatsSection() {
   ];
 
   return (
-    <section className="bg-emerald-900 py-12 text-white">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 text-center">
-          {stats.map((stat, idx) => (
-            <StatCard key={idx} label={stat.label} target={stat.target} suffix={stat.suffix} />
-          ))}
-        </div>
-      </div>
-    </section>
+    <>
+      {stats.map((stat, idx) => (
+        <StatCard key={idx} label={stat.label} target={stat.target} suffix={stat.suffix} />
+      ))}
+    </>
   );
 }
