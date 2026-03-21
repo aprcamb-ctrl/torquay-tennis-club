@@ -19,18 +19,32 @@ interface Message {
 
 function findClubAnswer(input: string): string | null {
   const lowerInput = input.toLowerCase();
+  const cleanInput = lowerInput.replace(/[?.,!]/g, '');
+  const inputWords = cleanInput.split(/\s+/);
 
   // 1. Check NEW JSON Knowledge Base (club_knowledge_base with tags) - HIGH PRIORITY
-  const clubMatch = (knowledgeBase as any).club_knowledge_base?.find((item: any) => 
-    item.tags.some((tag: string) => lowerInput.includes(tag.toLowerCase())) ||
-    item.question.toLowerCase().split(' ').some((word: string) => word.length > 3 && lowerInput.includes(word))
-  );
+  const clubMatch = (knowledgeBase as any).club_knowledge_base?.find((item: any) => {
+    // Check tags (with simple plural/singular support)
+    const hasTag = item.tags.some((tag: string) => {
+      const cleanTag = tag.toLowerCase();
+      return cleanInput.includes(cleanTag) || 
+             (cleanTag.endsWith('s') && cleanInput.includes(cleanTag.slice(0, -1))) ||
+             inputWords.includes(cleanTag);
+    });
+
+    // Check question words
+    const questionWords = item.question.toLowerCase().replace(/[?.,!]/g, '').split(/\s+/);
+    const hasWord = questionWords.some(word => word.length > 3 && inputWords.includes(word));
+
+    return hasTag || hasWord;
+  });
   if (clubMatch) return clubMatch.answer;
 
   // 2. Check Legacy Knowledge Base (additional_answers)
-  const kbMatch = knowledgeBase.additional_answers.find(item => 
-    item.question.toLowerCase().split(' ').some(word => word.length > 3 && lowerInput.includes(word))
-  );
+  const kbMatch = knowledgeBase.additional_answers.find(item => {
+    const questionWords = item.question.toLowerCase().replace(/[?.,!]/g, '').split(/\s+/);
+    return questionWords.some(word => word.length > 3 && inputWords.includes(word));
+  });
   if (kbMatch) return kbMatch.answer;
 
   // 3. Check Membership Constants
@@ -71,8 +85,6 @@ You can find more details in the Events section!`;
   if (lowerInput.includes('contact') || lowerInput.includes('phone') || lowerInput.includes('email')) {
     return `You can reach us at ${CLUB_KNOWLEDGE.contact.phone} or ${CLUB_KNOWLEDGE.contact.email}.`;
   }
-
-  if (clubMatch) return clubMatch.answer;
 
   return null;
 }
