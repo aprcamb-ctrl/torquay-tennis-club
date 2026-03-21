@@ -90,6 +90,91 @@ export default defineConfig({
           }
         ]
       },
+      {
+        name: "coaching",
+        label: "Coaching Page",
+        path: "content/pages",
+        format: "json",
+        ui: {
+          router: ({ document }) => {
+            if (document._sys.filename === "coaching") {
+              return `/coaching`;
+            }
+            return undefined;
+          },
+        },
+        fields: [
+          {
+            type: "object",
+            list: true,
+            name: "events",
+            label: "Upcoming Events",
+            ui: {
+              itemProps: (item) => ({ label: item?.name || "New Event" }),
+            },
+            fields: [
+              { type: "string", name: "name", label: "Event Name" },
+              { type: "string", name: "date", label: "Date" },
+              { type: "string", name: "time", label: "Time" },
+              { type: "string", name: "location", label: "Location" },
+              { type: "string", name: "description", label: "Description", ui: { component: "textarea" } },
+              { type: "image", name: "image", label: "Image" },
+              { type: "string", name: "bookingUrl", label: "Booking URL" },
+            ],
+          },
+          {
+            type: "object",
+            list: true,
+            name: "programs",
+            label: "Programs",
+            ui: {
+              itemProps: (item) => ({ label: item?.title || "New Program" }),
+            },
+            fields: [
+              { type: "string", name: "title", label: "Title" },
+              { type: "string", name: "description", label: "Description", ui: { component: "textarea" } },
+              { type: "string", name: "icon", label: "Icon Name (Lucide)" },
+              { type: "string", name: "color", label: "Color Classes (e.g. bg-blue-50 text-blue-600)" },
+            ],
+          },
+          {
+            type: "object",
+            list: true,
+            name: "programDetails",
+            label: "Program Details",
+            ui: {
+              itemProps: (item) => ({ label: item?.title || "New Detail" }),
+            },
+            fields: [
+              { type: "string", name: "title", label: "Title" },
+              { type: "string", name: "subtitle", label: "Subtitle" },
+              { type: "string", name: "description", label: "Description", ui: { component: "textarea" } },
+              { type: "string", list: true, name: "highlights", label: "Highlights" },
+              { type: "string", name: "icon", label: "Icon Name (Lucide)" },
+              { type: "string", name: "color", label: "Color Gradient (e.g. from-blue-500 to-blue-600)" },
+              { type: "string", name: "bgAccent", label: "BG Accent (e.g. bg-blue-50)" },
+              { type: "string", name: "textAccent", label: "Text Accent (e.g. text-blue-600)" },
+            ],
+          },
+          {
+            type: "object",
+            list: true,
+            name: "coaches",
+            label: "Coaches",
+            ui: {
+              itemProps: (item) => ({ label: item?.name || "New Coach" }),
+            },
+            fields: [
+              { type: "string", name: "name", label: "Name" },
+              { type: "string", name: "role", label: "Role" },
+              { type: "string", name: "specialty", label: "Specialty" },
+              { type: "string", name: "bio", label: "Bio", ui: { component: "textarea" } },
+              { type: "image", name: "image", label: "Photo" },
+              { type: "string", name: "icon", label: "Icon Name (Lucide)" },
+            ],
+          },
+        ],
+      },
     ],
   },
 });

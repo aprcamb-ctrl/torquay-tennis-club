@@ -10,8 +10,23 @@ export default function Navbar() {
 
   useEffect(() => {
     const currentPath = location.pathname;
-    if (currentPath === '/') setActiveLink('Home');
-    else if (currentPath === '/coaching') setActiveLink('Coaching');
+    const currentHash = location.hash;
+
+    if (currentPath === '/coaching') {
+      setActiveLink('Coaching');
+    } else if (currentPath === '/' && !currentHash) {
+      setActiveLink('Home');
+    } else {
+      // Prioritize hash matches if a hash exists
+      const hashMatch = currentHash ? navLinks.find(link => 
+        link.href.includes('#') && currentHash === link.href.substring(link.href.indexOf('#'))
+      ) : null;
+      
+      const pathMatch = navLinks.find(link => currentPath === link.href);
+      
+      const match = hashMatch || pathMatch;
+      if (match) setActiveLink(match.name);
+    }
   }, [location]);
 
   const navLinks = [
@@ -57,7 +72,7 @@ export default function Navbar() {
                 </Link>
               ))}
               <a
-                href="#membership"
+                href="/#membership"
                 className="bg-emerald-600 text-white px-6 py-2.5 rounded-full font-medium hover:bg-emerald-700 transition-colors shadow-sm whitespace-nowrap"
               >
                 Join Now
@@ -103,15 +118,13 @@ export default function Navbar() {
                   {link.name}
                 </Link>
               ))}
-              <div className="pt-4">
                 <a
-                  href="#membership"
+                  href="/#membership"
                   onClick={() => setIsOpen(false)}
                   className="block w-full text-center bg-emerald-600 text-white px-6 py-3 rounded-full font-medium hover:bg-emerald-700"
                 >
                   Join Now
                 </a>
-              </div>
             </div>
           </motion.div>
         )}

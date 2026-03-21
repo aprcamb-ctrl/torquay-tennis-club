@@ -1,9 +1,5 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Coaching from './pages/Coaching';
@@ -13,9 +9,49 @@ import EventPopup from './components/EventPopup';
 import WeatherWidget from './components/WeatherWidget';
 import { Analytics } from '@vercel/analytics/react';
 
+import { useTina } from 'tinacms/dist/react';
+import client from '../tina/__generated__/client';
+
+function ScrollToHash() {
+  const { hash } = useLocation();
+
+  useEffect(() => {
+    if (hash) {
+      const id = hash.replace('#', '');
+      let retries = 0;
+      const maxRetries = 10;
+      
+      const tryScroll = () => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        } else if (retries < maxRetries) {
+          retries++;
+          setTimeout(tryScroll, 200);
+        }
+      };
+
+      setTimeout(tryScroll, 100);
+    }
+  }, [hash]);
+
+  return null;
+}
+
 export default function App() {
+  const [coachingData, setCoachingData] = useState<any>(null);
+
+  useEffect(() => {
+    client.queries.coaching({ relativePath: 'coaching.json' }).then((res) => {
+      setCoachingData(res.data.coaching);
+    });
+  }, []);
+
+  const featuredEvent = coachingData?.events?.[0];
+
   return (
     <Router>
+      <ScrollToHash />
       <div className="min-h-screen bg-white selection:bg-emerald-200 selection:text-emerald-900">
         <Navbar />
         <main>
@@ -26,7 +62,7 @@ export default function App() {
         </main>
         <Footer />
         <WeatherWidget />
-        <EventPopup />
+        <EventPopup event={featuredEvent} />
         <ChatWidget />
         <Analytics />
       </div>

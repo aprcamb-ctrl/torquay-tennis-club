@@ -2,25 +2,29 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, Calendar } from 'lucide-react';
 
-export default function EventPopup() {
+export default function EventPopup({ event }: { event?: any }) {
   const [isVisible, setIsVisible] = useState(false);
   const [hasClosed, setHasClosed] = useState(false);
 
   useEffect(() => {
-    // Show popup after 5 seconds if it hasn't been closed manually
-    const timer = setTimeout(() => {
-      if (!hasClosed) {
-        setIsVisible(true);
-      }
-    }, 5000);
+    // Show popup after 5 seconds if it hasn't been closed manually and we have an event
+    if (event) {
+      const timer = setTimeout(() => {
+        if (!hasClosed) {
+          setIsVisible(true);
+        }
+      }, 5000);
 
-    return () => clearTimeout(timer);
-  }, [hasClosed]);
+      return () => clearTimeout(timer);
+    }
+  }, [hasClosed, event]);
 
   const handleClose = () => {
     setIsVisible(false);
     setHasClosed(true);
   };
+
+  if (!event) return null;
 
   return (
     <AnimatePresence>
@@ -50,12 +54,12 @@ export default function EventPopup() {
           {/* Content */}
           <div className="p-6">
             <div className="bg-emerald-50 rounded-xl p-4 border border-emerald-100">
-              <h4 className="font-bold text-gray-900 text-xl mb-1">Pub Night</h4>
-              <p className="text-emerald-600 font-medium text-sm mb-3">Friday March 27th</p>
+              <h4 className="font-bold text-gray-900 text-xl mb-1">{event.name}</h4>
+              <p className="text-emerald-600 font-medium text-sm mb-3">{event.date}</p>
               
               <div className="flex items-center justify-between mt-4 pt-4 border-t border-emerald-200">
                 <span className="text-gray-500 font-medium text-sm">Start Time:</span>
-                <span className="bg-emerald-100 text-emerald-800 text-xs font-bold px-2 py-1 rounded-md">6:00 PM</span>
+                <span className="bg-emerald-100 text-emerald-800 text-xs font-bold px-2 py-1 rounded-md">{event.time}</span>
               </div>
             </div>
             

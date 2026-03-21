@@ -1,59 +1,8 @@
 import { motion } from 'motion/react';
 import { Calendar, Clock, MapPin, ArrowRight } from 'lucide-react';
 
-export default function Events() {
-  const events = [
-    {
-      id: 1,
-      name: 'Pub Night',
-      date: 'Friday March 27th',
-      time: '6:00 PM',
-      location: 'Clubhouse Bar',
-      description: 'Join us for a relaxed evening at the clubhouse! Meet fellow members, enjoy some drinks, and celebrate the start of the weekend together.',
-      image: 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=2070&auto=format&fit=crop',
-      bookingUrl: 'https://buytickets.at/torquaypickleballclub/2073388',
-    },
-    {
-      id: 2,
-      name: 'DUPR Pickleball Event',
-      date: 'Sunday March 22nd',
-      time: '10:00 AM - 2:00 PM',
-      location: 'Torquay Tennis Club',
-      description: 'Test your skills in our upcoming official DUPR Pickleball event. Perfect for players looking to establish or improve their rating.',
-      image: 'https://i.postimg.cc/MH9x3RS3/DUPR.jpg',
-      bookingUrl: '#',
-    },
-    {
-      id: 3,
-      name: 'Spring Pickleball Festival',
-      date: 'April 11th & 12th',
-      time: '10:00 AM - 5:30 PM',
-      location: 'Torquay Tennis Club',
-      description: 'Welcome spring with a massive weekend Pickleball festival! Exciting matches, food, and fun for all skill levels.',
-      image: 'https://i.postimg.cc/x8pD32vF/Pickleball-Festival-Palm-Shield.png',
-      bookingUrl: '#',
-    },
-    {
-      id: 4,
-      name: 'The Bay Padel Tournament',
-      date: 'June 22nd',
-      time: '10:00 AM - 5:00 PM',
-      location: 'Padel Courts',
-      description: 'Get ready for our major summer Padel tournament. Compete against top local talent and enjoy the amazing atmosphere.',
-      image: 'https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?q=80&w=2070&auto=format&fit=crop',
-      bookingUrl: '#',
-    },
-    {
-      id: 5,
-      name: 'Torbay Open Tennis',
-      date: 'August 9th - 15th',
-      time: 'Various Times',
-      location: 'Torquay Tennis Club',
-      description: 'Our premier week-long tennis event is back. The Torbay Open attracts fantastic players for an unmissable week of high-quality tennis.',
-      image: 'https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?q=80&w=2070&auto=format&fit=crop',
-      bookingUrl: '#',
-    }
-  ];
+export default function Events({ events }: { events?: any[] }) {
+  if (!events) return null;
 
   return (
     <section id="events" className="py-24 bg-gray-50 border-t border-gray-100">
@@ -71,7 +20,7 @@ export default function Events() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
           {events.map((event, index) => (
             <motion.div
-              key={event.id}
+              key={event.name || index}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}

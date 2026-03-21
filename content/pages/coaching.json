@@ -1,0 +1,203 @@
+{
+  "events": [
+    {
+      "name": "Pub Night",
+      "date": "Friday March 27th",
+      "time": "6:00 PM",
+      "location": "Clubhouse Bar",
+      "description": "Join us for a relaxed evening at the clubhouse! Meet fellow members, enjoy some drinks, and celebrate the start of the weekend together.\nMeet the New Chairman and the Committee Members",
+      "image": "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=2070&auto=format&fit=crop",
+      "bookingUrl": "https://buytickets.at/torquaypickleballclub/2073388"
+    },
+    {
+      "name": "DUPR Pickleball Event",
+      "date": "Sunday March 22nd",
+      "time": "10:00 AM - 2:00 PM",
+      "location": "Torquay Tennis Club",
+      "description": "Test your skills in our upcoming official DUPR Pickleball event. Perfect for players looking to establish or improve their rating.",
+      "image": "https://i.postimg.cc/MH9x3RS3/DUPR.jpg",
+      "bookingUrl": "#"
+    },
+    {
+      "name": "Summer Pickleball Festival",
+      "date": "April 11th & 12th",
+      "time": "10:00 AM - 5:30 PM",
+      "location": "Torquay Tennis Club",
+      "description": "Welcome spring with a massive weekend Pickleball festival! Exciting matches, food, and fun for all skill levels.",
+      "image": "https://i.postimg.cc/x8pD32vF/Pickleball-Festival-Palm-Shield.png",
+      "bookingUrl": "#"
+    },
+    {
+      "name": "The Bay Padel Tournament",
+      "date": "June 22nd",
+      "time": "10:00 AM - 5:00 PM",
+      "location": "Padel Courts",
+      "description": "Get ready for our major summer Padel tournament. Compete against top local talent and enjoy the amazing atmosphere.",
+      "image": "https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?q=80&w=2070&auto=format&fit=crop",
+      "bookingUrl": "#"
+    },
+    {
+      "name": "Torbay Open Tennis",
+      "date": "August 9th - 15th",
+      "time": "Various Times",
+      "location": "Torquay Tennis Club",
+      "description": "Our premier week-long tennis event is back. The Torbay Open attracts fantastic players for an unmissable week of high-quality tennis.",
+      "image": "https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?q=80&w=2070&auto=format&fit=crop",
+      "bookingUrl": "#"
+    }
+  ],
+  "programs": [
+    {
+      "title": "Junior Coaching",
+      "description": "Ages 4-18. From mini red ball to performance squads. Our LTA accredited coaches make learning fun and effective.",
+      "icon": "Users",
+      "color": "bg-blue-50 text-blue-600"
+    },
+    {
+      "title": "Adult Clinics",
+      "description": "Group sessions for all levels. Cardio tennis, tactical drills, and match play evenings to improve your game.",
+      "icon": "User",
+      "color": "bg-emerald-50 text-emerald-600"
+    },
+    {
+      "title": "Private Lessons",
+      "description": "1-on-1 coaching tailored to your specific needs. Perfect for rapid improvement and technical refinement.",
+      "icon": "Trophy",
+      "color": "bg-purple-50 text-purple-600"
+    },
+    {
+      "title": "Tournaments",
+      "description": "Regular club tournaments, box leagues, and team tennis. Compete locally and regionally representing Torquay.",
+      "icon": "CalendarDays",
+      "color": "bg-orange-50 text-orange-600"
+    }
+  ],
+  "programDetails": [
+    {
+      "title": "Junior Coaching",
+      "subtitle": "Ages 4–18 · LTA Accredited",
+      "description": "Our junior programme is designed to nurture young talent from their very first swing to competitive match play. Using the LTA progressive pathway (mini red, orange, green, and yellow ball), we ensure every child develops at the right pace.",
+      "highlights": [
+        "Mini Tennis (ages 4–8): Saturday mornings, fun-first approach",
+        "Development Squads (ages 9–14): Tuesdays & Thursdays after school",
+        "Performance Squad (ages 14–18): intensive training 3× per week",
+        "Holiday camps during every school break"
+      ],
+      "icon": "Users",
+      "color": "from-blue-500 to-blue-600",
+      "bgAccent": "bg-blue-50",
+      "textAccent": "text-blue-600"
+    },
+    {
+      "title": "Adult Clinics",
+      "subtitle": "All Levels · Social & Competitive",
+      "description": "Whether you want to pick up a racket for the first time or sharpen your competitive edge, our adult clinics offer something for everyone in a welcoming, social atmosphere.",
+      "highlights": [
+        "Beginners Welcome: Monday & Wednesday evenings, 6–7 PM",
+        "Cardio Tennis: high-energy fitness on court, Saturdays 9 AM",
+        "Tactical Drills: intermediate & advanced, Tuesdays 7–8:30 PM",
+        "Social Mix-In: Friday evenings, play with different partners"
+      ],
+      "icon": "Zap",
+      "color": "from-emerald-500 to-emerald-600",
+      "bgAccent": "bg-emerald-50",
+      "textAccent": "text-emerald-600"
+    },
+    {
+      "title": "Private Lessons",
+      "subtitle": "1-on-1 · Tailored to You",
+      "description": "Accelerate your improvement with personalised coaching from our certified professionals. Every session is customised to target your unique strengths and areas for growth.",
+      "highlights": [
+        "30-minute or 60-minute sessions available",
+        "Video analysis and technique review included",
+        "Flexible scheduling, 7 days a week",
+        "Package discounts: 5 lessons for the price of 4"
+      ],
+      "icon": "Target",
+      "color": "from-purple-500 to-purple-600",
+      "bgAccent": "bg-purple-50",
+      "textAccent": "text-purple-600"
+    },
+    {
+      "title": "Tournaments & Leagues",
+      "subtitle": "Compete · Represent · Win",
+      "description": "Put your skills to the test in our regular tournaments and box leagues. From friendly internal events to representing Torquay in regional competitions, there is a competitive pathway for every ambition.",
+      "highlights": [
+        "Monthly club box leagues (singles & doubles)",
+        "Annual Club Championships with trophies and prizes",
+        "Devon League teams across multiple divisions",
+        "Junior inter-club matches and county trials"
+      ],
+      "icon": "Medal",
+      "color": "from-orange-500 to-orange-600",
+      "bgAccent": "bg-orange-50",
+      "textAccent": "text-orange-600"
+    }
+  ],
+  "coaches": [
+    {
+      "name": "James Hartley",
+      "role": "Head Coach",
+      "specialty": "Performance & Strategy",
+      "bio": "LTA Level 5 coach with 20 years of experience. Former county player who has coached nationally ranked juniors.LTA Level 5 coach with 25 years of experience! Former county player who has coached nationally ranked juniors.",
+      "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=300&auto=format&fit=crop",
+      "icon": "GraduationCap"
+    },
+    {
+      "name": "Sophie Williams",
+      "role": "Junior Development Lead",
+      "specialty": "Mini Tennis & Youth",
+      "bio": "Passionate about making tennis fun for kids. Runs our award-winning mini tennis programme and holiday camps.",
+      "image": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=300&auto=format&fit=crop",
+      "icon": "Users"
+    },
+    {
+      "name": "Marcus Chen",
+      "role": "Adult Programme Coach",
+      "specialty": "Tactical Play & Fitness",
+      "bio": "Combines fitness expertise with tennis coaching. Leads our popular Cardio Tennis and adult improvement clinics.",
+      "image": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=300&auto=format&fit=crop",
+      "icon": "Dumbbell"
+    },
+    {
+      "name": "Elena Rodriguez",
+      "role": "Performance Coach",
+      "specialty": "Competitive & Match Play",
+      "bio": "Former WTA touring professional. Specialises in match preparation and mental toughness training.",
+      "image": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=300&auto=format&fit=crop",
+      "icon": "Target"
+    },
+    {
+      "name": "Tom Bradley",
+      "role": "Padel Coach",
+      "specialty": "Padel & Racket Sports",
+      "bio": "One of the first certified padel coaches in Devon. Bringing the fastest-growing racket sport to Torquay.",
+      "image": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=300&auto=format&fit=crop",
+      "icon": "Zap"
+    },
+    {
+      "name": "Rachel Adams",
+      "role": "Community Coach",
+      "specialty": "Inclusivity & Wellbeing",
+      "bio": "Leads our walking tennis and disability tennis programmes. Believes everyone deserves access to the sport.",
+      "image": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=300&auto=format&fit=crop",
+      "icon": "HeartHandshake"
+    },
+    {
+      "name": "Daniel Osei",
+      "role": "Junior Performance Coach",
+      "specialty": "County & Regional Players",
+      "bio": "Works with our most talented juniors preparing them for county and national level competitions.",
+      "image": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=300&auto=format&fit=crop",
+      "icon": "Medal"
+    },
+    {
+      "name": "Katie Morrison",
+      "role": "Pickleball Instructor",
+      "specialty": "Pickleball & Social Play",
+      "bio": "Certified pickleball instructor bringing infectious energy to every session. Leads our social play evenings.",
+      "image": "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=300&auto=format&fit=crop",
+      "icon": "Zap"
+    }
+  ]
+}
