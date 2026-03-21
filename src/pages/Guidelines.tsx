@@ -49,27 +49,15 @@ const CLUB_POLICIES = [
 export default function Guidelines() {
   return (
     <div className="min-h-screen bg-gray-50 pt-24 pb-20">
-      {/* Hero Section */}
-      <section className="bg-emerald-900 text-white py-20 relative overflow-hidden">
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-emerald-500/20 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
-          <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-emerald-800/40 rounded-full blur-3xl transform -translate-x-1/2 translate-y-1/2"></div>
-        </div>
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="inline-flex items-center justify-center p-3 bg-white/10 rounded-2xl mb-6 shadow-inset border border-white/20">
-              <Shield className="w-8 h-8 text-emerald-300" />
-            </div>
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 tracking-tight">Club <span className="text-emerald-400">Guidelines</span></h1>
-            <p className="text-xl md:text-2xl text-emerald-100 max-w-3xl mx-auto leading-relaxed">
-              Torquay Tennis Club is dedicated to maintaining a safe, inclusive, and professional environment for all our members, guests, and staff.
-            </p>
-          </motion.div>
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-8">
+        <div className="text-center max-w-3xl mx-auto">
+          <h2 className="text-emerald-600 font-semibold tracking-wide uppercase text-sm mb-3">Club Rules & Safety</h2>
+          <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+            Club Guidelines
+          </p>
+          <p className="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">
+            Torquay Tennis Club is dedicated to maintaining a safe, inclusive, and professional environment for all our members, guests, and staff.
+          </p>
         </div>
       </section>
 

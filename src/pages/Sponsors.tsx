@@ -53,24 +53,15 @@ const GOLD_SPONSORS = [
 export default function Sponsors() {
   return (
     <div className="min-h-screen bg-gray-50 pt-24 pb-20">
-      {/* Hero Section */}
-      <section className="bg-emerald-900 text-white py-20 relative overflow-hidden">
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute -top-1/2 -right-1/2 w-full h-full bg-gradient-to-b from-emerald-500/20 to-transparent rounded-full blur-3xl transform rotate-45"></div>
-          <div className="absolute -bottom-1/2 -left-1/2 w-full h-full bg-gradient-to-t from-emerald-800/40 to-transparent rounded-full blur-3xl"></div>
-        </div>
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 tracking-tight">Club <span className="text-yellow-400">Sponsors</span></h1>
-            <p className="text-xl md:text-2xl text-emerald-100 max-w-3xl mx-auto leading-relaxed">
-              We are incredibly grateful to the local businesses and national brands that help make Torquay Tennis Club a premier sporting destination.
-            </p>
-          </motion.div>
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-8">
+        <div className="text-center max-w-3xl mx-auto">
+          <h2 className="text-emerald-600 font-semibold tracking-wide uppercase text-sm mb-3">Our Partners</h2>
+          <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+            Club Sponsors
+          </p>
+          <p className="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">
+            We are incredibly grateful to the local businesses and national brands that help make Torquay Tennis Club a premier sporting destination.
+          </p>
         </div>
       </section>
 
