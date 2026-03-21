@@ -23,22 +23,25 @@ function findClubAnswer(input: string): string | null {
   const inputWords = cleanInput.split(/\s+/);
 
   // 1. Check NEW JSON Knowledge Base (club_knowledge_base with tags) - HIGH PRIORITY
-  const clubMatch = (knowledgeBase as any).club_knowledge_base?.find((item: any) => {
-    // Check tags (with simple plural/singular support)
-    const hasTag = item.tags.some((tag: string) => {
+  const clubMatches = (knowledgeBase as any).club_knowledge_base?.map((item: any) => {
+    let score = 0;
+    // Tag matches (High weight)
+    item.tags.forEach((tag: string) => {
       const cleanTag = tag.toLowerCase();
-      return cleanInput.includes(cleanTag) || 
-             (cleanTag.endsWith('s') && cleanInput.includes(cleanTag.slice(0, -1))) ||
-             inputWords.includes(cleanTag);
+      if (inputWords.includes(cleanTag)) score += 10;
+      else if (cleanInput.includes(cleanTag)) score += 5;
     });
-
-    // Check question words
+    // Question word matches (Medium weight)
     const questionWords = item.question.toLowerCase().replace(/[?.,!]/g, '').split(/\s+/);
-    const hasWord = questionWords.some(word => word.length > 3 && inputWords.includes(word));
+    questionWords.forEach((word: string) => {
+      if (word.length > 3 && !['tennis', 'club', 'torquay', 'how', 'what', 'where'].includes(word) && inputWords.includes(word)) {
+        score += 5;
+      }
+    });
+    return { item, score };
+  }).filter((m: any) => m.score > 0).sort((a: any, b: any) => b.score - a.score);
 
-    return hasTag || hasWord;
-  });
-  if (clubMatch) return clubMatch.answer;
+  if (clubMatches && clubMatches.length > 0) return clubMatches[0].item.answer;
 
   // 2. Check Legacy Knowledge Base (additional_answers)
   const kbMatch = knowledgeBase.additional_answers.find(item => {
