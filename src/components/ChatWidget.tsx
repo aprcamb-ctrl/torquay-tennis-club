@@ -43,13 +43,6 @@ function findClubAnswer(input: string): string | null {
 
   if (clubMatches && clubMatches.length > 0) return clubMatches[0].item.answer;
 
-  // 2. Check Legacy Knowledge Base (additional_answers)
-  const kbMatch = knowledgeBase.additional_answers.find(item => {
-    const questionWords = item.question.toLowerCase().replace(/[?.,!]/g, '').split(/\s+/);
-    return questionWords.some(word => word.length > 3 && inputWords.includes(word));
-  });
-  if (kbMatch) return kbMatch.answer;
-
   // 3. Check Membership Constants
   if (lowerInput.includes('membership') || lowerInput.includes('price') || lowerInput.includes('join') || lowerInput.includes('cost')) {
     return `We offer several membership options: 
@@ -143,23 +136,23 @@ export default function ChatWidget() {
     setInput('');
     setIsLoading(true);
 
-    const fallbackMessage = "I'm having trouble connecting. Please try again or call us at +44 1803 123456.";
+    const fallbackMessage = "I'm having trouble connecting. Please try again or call us at +44 1803 209500.";
 
     // SMART LOCAL FALLBACK (Always check this first or if API key is invalid)
     if (!API_KEY || API_KEY === 'YOUR_KEY_HERE') {
       const foundAnswer = findClubAnswer(currentInput);
-      
+
       if (!foundAnswer) {
         captureUnansweredQuestion(currentInput);
       }
 
       const botMessage: Message = {
         id: (Date.now() + 1).toString(),
-        text: foundAnswer || "I'm not exactly sure about that, but the club office can help! You can call us on +44 1803 123456 or email hello@torquaytennis.co.uk. Would you like me to call the office for you?",
+        text: foundAnswer || "I'm not exactly sure about that, but the club office can help! You can call us on +44 1803 209500 or email info@torquaytennis.co.uk. Would you like me to call the office for you?",
         sender: 'bot',
         timestamp: new Date(),
       };
-      
+
       setMessages((prev) => [...prev, botMessage]);
       setIsLoading(false);
       return;
@@ -167,11 +160,11 @@ export default function ChatWidget() {
 
     try {
       const ai = new GoogleGenAI({ apiKey: API_KEY });
-      
+
       const systemInstruction = `
         You are an AI assistant for Torquay Tennis Club.
         Your goal is to answer user questions based on the website and knowledge base info.
-        If you genuinely do not know the answer based on the knowledge base, you must reply closely with: "I'm not exactly sure about that, but the club office can help! You can call us on +44 1803 123456."
+        If you genuinely do not know the answer based on the knowledge base, you must reply closely with: "I'm not exactly sure about that, but the club office can help! You can call us on +44 1803 209500."
         Be professional, friendly, and helpful.
       `;
 
@@ -187,9 +180,9 @@ export default function ChatWidget() {
 
       const responseText = response.text || (typeof response.text === 'function' ? await (response as any).text() : null);
       const botResponseStr = responseText || "";
-      
+
       if (
-        botResponseStr.toLowerCase().includes("not exactly sure") || 
+        botResponseStr.toLowerCase().includes("not exactly sure") ||
         botResponseStr.toLowerCase().includes("don't have that information") ||
         botResponseStr.toLowerCase().includes("please contact the club") ||
         !botResponseStr
@@ -199,7 +192,7 @@ export default function ChatWidget() {
 
       const botMessage: Message = {
         id: (Date.now() + 1).toString(),
-        text: responseText || "I'm not exactly sure, but you can contact the club on +44 1803 123456.",
+        text: responseText || "I'm not exactly sure, but you can contact the club on +44 1803 209500.",
         sender: 'bot',
         timestamp: new Date(),
       };
@@ -208,7 +201,7 @@ export default function ChatWidget() {
     } catch (error) {
       console.error('Chat Error:', error);
       const foundAnswer = findClubAnswer(currentInput);
-      
+
       if (!foundAnswer) {
         captureUnansweredQuestion(currentInput);
       }
@@ -246,7 +239,7 @@ export default function ChatWidget() {
                   <p className="text-xs text-emerald-100 italic">Online & helpful</p>
                 </div>
               </div>
-              <button 
+              <button
                 onClick={() => setIsOpen(false)}
                 className="p-1 hover:bg-white/10 rounded-lg transition-colors"
                 aria-label="Close chat"
@@ -263,17 +256,16 @@ export default function ChatWidget() {
                   className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
                 >
                   <div
-                    className={`max-w-[85%] p-3 rounded-2xl text-sm whitespace-pre-line ${
-                      msg.sender === 'user'
+                    className={`max-w-[85%] p-3 rounded-2xl text-sm whitespace-pre-line ${msg.sender === 'user'
                         ? 'bg-emerald-600 text-white rounded-tr-none shadow-md shadow-emerald-100'
                         : 'bg-white text-gray-800 border border-gray-100 shadow-sm rounded-tl-none'
-                    }`}
+                      }`}
                   >
                     {msg.text}
-                    {msg.sender === 'bot' && msg.text.includes('+44 1803 123456') && (
+                    {msg.sender === 'bot' && msg.text.includes('+44 1803 209500') && (
                       <div className="mt-2 pt-2 border-t border-gray-100">
-                        <a 
-                          href="tel:+441803123456"
+                        <a
+                          href="tel:+44180209500"
                           className="inline-flex items-center gap-2 text-emerald-600 font-bold hover:text-emerald-700 transition-colors"
                         >
                           <Phone className="w-4 h-4" />
