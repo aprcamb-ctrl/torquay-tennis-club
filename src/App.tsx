@@ -12,8 +12,8 @@ import { Analytics } from '@vercel/analytics/react';
 import { useTina } from 'tinacms/dist/react';
 import client from '../tina/__generated__/client';
 
-function ScrollToHash() {
-  const { hash } = useLocation();
+function ScrollManager() {
+  const { pathname, hash, key } = useLocation();
 
   useEffect(() => {
     if (hash) {
@@ -32,8 +32,11 @@ function ScrollToHash() {
       };
 
       setTimeout(tryScroll, 100);
+    } else {
+      // Scroll to top on any navigation without a hash
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-  }, [hash]);
+  }, [pathname, hash, key]);
 
   return null;
 }
@@ -51,7 +54,7 @@ export default function App() {
 
   return (
     <Router>
-      <ScrollToHash />
+      <ScrollManager />
       <div className="min-h-screen bg-white selection:bg-emerald-200 selection:text-emerald-900">
         <Navbar />
         <main>
