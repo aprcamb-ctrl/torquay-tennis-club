@@ -79,8 +79,10 @@ export default function Footer() {
                 <a href="tel:01803209500" className="text-gray-400 hover:text-emerald-400 transition-colors">01803 209500</a>
               </li>
               <li className="flex items-center gap-3">
-                <Mail className="w-5 h-5 text-emerald-500 shrink-0" />
-                <a href="mailto:info@torquaytennis.com" className="text-gray-400 hover:text-emerald-400 transition-colors">info@torquaytennis.com</a>
+                <div className="w-8 h-8 rounded-full bg-emerald-900/50 flex flex-shrink-0 items-center justify-center">
+                  <Mail className="w-4 h-4 text-emerald-400" />
+                </div>
+                <a href="mailto:info@torquaytennisclub.co.uk" className="text-gray-400 hover:text-emerald-400 transition-colors">info@torquaytennisclub.co.uk</a>
               </li>
             </ul>
           </div>

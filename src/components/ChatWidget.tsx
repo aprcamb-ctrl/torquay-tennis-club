@@ -148,7 +148,7 @@ export default function ChatWidget() {
 
       const botMessage: Message = {
         id: (Date.now() + 1).toString(),
-        text: foundAnswer || "I'm not exactly sure about that, but the club office can help! You can call us on +44 1803 209500 or email info@torquaytennis.co.uk. Would you like me to call the office for you?",
+        text: foundAnswer || "I'm not exactly sure about that, but the club office can help! You can call us on 01803 209500 or email info@torquaytennisclub.co.uk. Would you like me to call the office for you?",
         sender: 'bot',
         timestamp: new Date(),
       };
@@ -164,7 +164,7 @@ export default function ChatWidget() {
       const systemInstruction = `
         You are an AI assistant for Torquay Tennis Club.
         Your goal is to answer user questions based on the website and knowledge base info.
-        If you genuinely do not know the answer based on the knowledge base, you must reply closely with: "I'm not exactly sure about that, but the club office can help! You can call us on +44 1803 209500."
+        If you genuinely do not know the answer based on the knowledge base, you must reply closely with: "I'm not exactly sure about that, but the club office can help! You can call us on 01803 209500."
         Be professional, friendly, and helpful.
       `;
 
@@ -192,7 +192,7 @@ export default function ChatWidget() {
 
       const botMessage: Message = {
         id: (Date.now() + 1).toString(),
-        text: responseText || "I'm not exactly sure, but you can contact the club on +44 1803 209500.",
+        text: responseText || "I'm not exactly sure, but you can contact the club on 01803 209500.",
         sender: 'bot',
         timestamp: new Date(),
       };
@@ -262,10 +262,10 @@ export default function ChatWidget() {
                       }`}
                   >
                     {msg.text}
-                    {msg.sender === 'bot' && msg.text.includes('+44 1803 209500') && (
+                    {msg.sender === 'bot' && msg.text.includes('01803 209500') && (
                       <div className="mt-2 pt-2 border-t border-gray-100">
                         <a
-                          href="tel:+44180209500"
+                          href="tel:01803209500"
                           className="inline-flex items-center gap-2 text-emerald-600 font-bold hover:text-emerald-700 transition-colors"
                         >
                           <Phone className="w-4 h-4" />

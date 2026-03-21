@@ -22,7 +22,7 @@ export const CLUB_KNOWLEDGE = {
   ],
   contact: {
     phone: '01803 209500',
-    email: 'info@torquaytennis.com',
+    email: 'info@torquaytennisclub.co.uk',
     address: 'Belgrave Road, Torquay, TQ2 5HP',
     hours: {
       weekday: '9:00 AM - 10:00 PM',
