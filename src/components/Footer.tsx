@@ -11,7 +11,7 @@ export default function Footer() {
             <img 
               src="https://i.postimg.cc/50Jt9Ptj/TTC-Logo-New.jpg" 
               alt="Torquay Tennis Club Logo" 
-              className="h-16 w-auto brightness-0 invert"
+              className="h-16 w-auto rounded-lg"
             />
             <p className="text-gray-400 leading-relaxed">
               Experience world-class tennis and social facilities in the heart of Torquay. Join our vibrant community today.
