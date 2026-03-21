@@ -1,29 +1,29 @@
 export const CLUB_KNOWLEDGE = {
   membership: [
-    { name: 'Batz Membership', price: '£59/year', description: 'For Padel and Pickleball players. Includes discounted booking and 10% off at the bar.' },
-    { name: 'Adult Full', price: '£325/year', description: 'Full playing rights 7 days a week. 14 days advance booking, free floodlights, and 10% off at the bar.' },
-    { name: 'Family', price: '£450/year', description: '2 Adults and up to 3 Juniors. Includes all Adult Full and Junior benefits.' }
+    { name: 'Adult Full', price: '£359/year', description: 'Full playing rights 7 days a week. 14 days advance booking, free floodlights, and 10% off at the bar.' },
+    { name: 'Family', price: '£659/year', description: '2 Adults and up to 3 Juniors. Includes all Adult Full and Junior benefits.' },
+    { name: 'Under 25s', price: '£139/year', description: 'Reduced rate for young adults with full playing rights.' },
+    { name: 'New Member Rate', price: '£249/year', description: 'Special introductory rate for those who haven\'t been members in the last 5 years.' }
   ],
   facilities: [
-    { name: 'Tennis Courts', detail: '8 total: 4 Artificial Clay and 4 Hard courts. All with LED floodlights.' },
-    { name: 'Indoor Courts', detail: '3 Indoor tennis courts available.' },
-    { name: 'Padel & Pickleball', detail: '3 Padel courts and 2 Outdoor Pickleball courts.' },
+    { name: 'Outdoor Tennis Courts', detail: '9 total: Artificial Clay and Tiger Turf surfaces with LED floodlights.' },
+    { name: 'Indoor Courts', detail: '3 Indoor Acrylic tennis courts available for all-weather play.' },
+    { name: 'Padel & Pickleball', detail: 'Dedicated Padel court and multiple Pickleball courts with regular social sessions.' },
     { name: 'Clubhouse', detail: 'Licensed bar, cafe, viewing balcony, pro shop, and changing rooms.' }
   ],
   programs: [
-    { name: 'Junior Coaching', detail: 'For ages 4-18, from beginners to performance squads.' },
-    { name: 'Adult Clinics', detail: 'Cardio tennis, tactical drills, and match play evenings.' },
-    { name: 'Private Lessons', detail: '1-on-1 sessions with LTA accredited coaches.' }
+    { name: 'Junior Coaching', detail: 'Comprehensive program for ages 4-18, from beginners to performance squads.' },
+    { name: 'Adult Clinics', detail: 'Weekly sessions including Cardio tennis, tactical drills, and match play.' },
+    { name: 'Private Lessons', detail: '1-on-1 sessions with Head Coach Steve Maslen and our LTA accredited team.' }
   ],
   events: [
-    { name: 'DUPR Pickleball Event', date: 'Sunday March 22nd, 10am - 2pm' },
-    { name: 'Pub Night', date: 'Friday March 27th, 6pm' },
-    { name: 'Spring Pickleball Festival', date: 'April 11th & 12th, 10am - 5:30pm' }
+    { name: 'Pub Night', date: 'Regular social evenings on Fridays' },
+    { name: 'Summer Pickleball Festival', date: 'Upcoming major event - check our events page for dates!' }
   ],
   contact: {
-    phone: '+44 1803 123456',
-    email: 'hello@torquaytennis.co.uk',
-    address: '123 Tennis Lane, Torquay, TQ1 1AB',
+    phone: '01803 209500',
+    email: 'info@torquaytennis.com',
+    address: 'Belgrave Road, Torquay, TQ2 5HP',
     hours: {
       weekday: '9:00 AM - 10:00 PM',
       weekend: '9:00 AM - 5:00 PM'

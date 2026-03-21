@@ -20,35 +20,48 @@ interface Message {
 function findClubAnswer(input: string): string | null {
   const lowerInput = input.toLowerCase();
 
-  // 1. Check Membership
+  // 1. Check NEW JSON Knowledge Base (club_knowledge_base with tags) - HIGH PRIORITY
+  const clubMatch = (knowledgeBase as any).club_knowledge_base?.find((item: any) => 
+    item.tags.some((tag: string) => lowerInput.includes(tag.toLowerCase())) ||
+    item.question.toLowerCase().split(' ').some((word: string) => word.length > 3 && lowerInput.includes(word))
+  );
+  if (clubMatch) return clubMatch.answer;
+
+  // 2. Check Legacy Knowledge Base (additional_answers)
+  const kbMatch = knowledgeBase.additional_answers.find(item => 
+    item.question.toLowerCase().split(' ').some(word => word.length > 3 && lowerInput.includes(word))
+  );
+  if (kbMatch) return kbMatch.answer;
+
+  // 3. Check Membership Constants
   if (lowerInput.includes('membership') || lowerInput.includes('price') || lowerInput.includes('join') || lowerInput.includes('cost')) {
     return `We offer several membership options: 
 ${CLUB_KNOWLEDGE.membership.map(m => `• ${m.name} (${m.price}): ${m.description}`).join('\n')}
 Which one are you interested in?`;
   }
 
-  // 2. Check Facilities
+  // 4. Check Facilities Constants
   if (lowerInput.includes('court') || lowerInput.includes('facilit') || lowerInput.includes('padel') || lowerInput.includes('pickleball')) {
     return `Our world-class facilities include:
 ${CLUB_KNOWLEDGE.facilities.map(f => `• ${f.name}: ${f.detail}`).join('\n')}
 Would you like to know more about a specific facility?`;
   }
 
-  // 3. Check Programs/Coaching
+  // 5. Check Programs/Coaching Constants
   if (lowerInput.includes('coach') || lowerInput.includes('program') || lowerInput.includes('lesson') || lowerInput.includes('train')) {
     return `We have programs for every level:
 ${CLUB_KNOWLEDGE.programs.map(p => `• ${p.name}: ${p.detail}`).join('\n')}
 You can book private lessons with our LTA accredited coaches at the reception.`;
   }
 
-  // 4. Check Events
+  // 6. Check Events Constants
   if (lowerInput.includes('event') || lowerInput.includes('happen') || lowerInput.includes('night') || lowerInput.includes('festival')) {
     return `We have some exciting upcoming events:
 ${CLUB_KNOWLEDGE.events.map(e => `• ${e.name} (${e.date})`).join('\n')}
 You can find more details in the Events section!`;
   }
 
-  // 5. Check Time/Location
+  // 7. Check Time/Location Constants
   if (lowerInput.includes('hour') || lowerInput.includes('open') || lowerInput.includes('time')) {
     return `The club is open Monday to Friday from 9:00 AM to 10:00 PM, and Saturday/Sunday from 9:00 AM to 5:00 PM.`;
   }
@@ -59,18 +72,7 @@ You can find more details in the Events section!`;
     return `You can reach us at ${CLUB_KNOWLEDGE.contact.phone} or ${CLUB_KNOWLEDGE.contact.email}.`;
   }
 
-  // 6. Check JSON Knowledge Base (club_knowledge_base with tags)
-  const clubMatch = (knowledgeBase as any).club_knowledge_base?.find((item: any) => 
-    item.tags.some((tag: string) => lowerInput.includes(tag.toLowerCase())) ||
-    item.question.toLowerCase().split(' ').some((word: string) => word.length > 3 && lowerInput.includes(word))
-  );
   if (clubMatch) return clubMatch.answer;
-
-  // 7. Check Legacy Knowledge Base (additional_answers)
-  const kbMatch = knowledgeBase.additional_answers.find(item => 
-    item.question.toLowerCase().split(' ').some(word => word.length > 3 && lowerInput.includes(word))
-  );
-  if (kbMatch) return kbMatch.answer;
 
   return null;
 }
