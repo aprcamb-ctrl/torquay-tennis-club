@@ -114,6 +114,20 @@ export default function ChatWidget() {
     scrollToBottom();
   }, [messages]);
 
+  const captureUnansweredQuestion = async (unansweredQuestion: string) => {
+    try {
+      await fetch('/api/capture-question', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ question: unansweredQuestion }),
+      });
+    } catch (err) {
+      console.error('Failed to capture unanswered question:', err);
+    }
+  };
+
   const handleSend = async () => {
     if (!input.trim() || isLoading) return;
 
@@ -135,6 +149,10 @@ export default function ChatWidget() {
     if (!API_KEY || API_KEY === 'YOUR_KEY_HERE') {
       const foundAnswer = findClubAnswer(currentInput);
       
+      if (!foundAnswer) {
+        captureUnansweredQuestion(currentInput);
+      }
+
       const botMessage: Message = {
         id: (Date.now() + 1).toString(),
         text: foundAnswer || "I'm not exactly sure about that, but the club office can help! You can call us on +44 1803 123456 or email hello@torquaytennis.co.uk. Would you like me to call the office for you?",
@@ -153,6 +171,7 @@ export default function ChatWidget() {
       const systemInstruction = `
         You are an AI assistant for Torquay Tennis Club.
         Your goal is to answer user questions based on the website and knowledge base info.
+        If you genuinely do not know the answer based on the knowledge base, you must reply closely with: "I'm not exactly sure about that, but the club office can help! You can call us on +44 1803 123456."
         Be professional, friendly, and helpful.
       `;
 
@@ -167,6 +186,17 @@ export default function ChatWidget() {
       });
 
       const responseText = response.text || (typeof response.text === 'function' ? await (response as any).text() : null);
+      const botResponseStr = responseText || "";
+      
+      if (
+        botResponseStr.toLowerCase().includes("not exactly sure") || 
+        botResponseStr.toLowerCase().includes("don't have that information") ||
+        botResponseStr.toLowerCase().includes("please contact the club") ||
+        !botResponseStr
+      ) {
+        captureUnansweredQuestion(currentInput);
+      }
+
       const botMessage: Message = {
         id: (Date.now() + 1).toString(),
         text: responseText || "I'm not exactly sure, but you can contact the club on +44 1803 123456.",
@@ -177,9 +207,15 @@ export default function ChatWidget() {
       setMessages((prev) => [...prev, botMessage]);
     } catch (error) {
       console.error('Chat Error:', error);
+      const foundAnswer = findClubAnswer(currentInput);
+      
+      if (!foundAnswer) {
+        captureUnansweredQuestion(currentInput);
+      }
+
       const botMessage: Message = {
         id: (Date.now() + 1).toString(),
-        text: findClubAnswer(currentInput) || fallbackMessage,
+        text: foundAnswer || fallbackMessage,
         sender: 'bot',
         timestamp: new Date(),
       };

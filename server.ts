@@ -38,6 +38,12 @@ db.exec(`
     requirements TEXT,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
   );
+
+  CREATE TABLE IF NOT EXISTS unanswered_questions (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    question TEXT NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+  );
 `);
 
 app.post('/api/subscribe', (req, res) => {
@@ -87,6 +93,28 @@ app.post('/api/book-clubhouse', (req, res) => {
     res.status(201).json({ message: 'Enquiry sent successfully' });
   } catch (error) {
     console.error('Booking error:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+app.post('/api/capture-question', (req, res) => {
+  const { question } = req.body;
+
+  if (!question) {
+    return res.status(400).json({ error: 'Missing question field' });
+  }
+
+  try {
+    const stmt = db.prepare('INSERT INTO unanswered_questions (question) VALUES (?)');
+    stmt.run(question);
+    
+    console.log('--- NEW UNANSWERED AI QUESTION (Local DB) ---');
+    console.log(`Question: ${question}`);
+    console.log('---------------------------------------------');
+
+    res.status(201).json({ message: 'Question captured successfully' });
+  } catch (error) {
+    console.error('Capture error:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 });
