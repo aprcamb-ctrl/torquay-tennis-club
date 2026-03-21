@@ -1,31 +1,48 @@
-import React from 'react';
-import { motion } from 'motion/react';
+import { useState, useEffect } from 'react';
+import client from '../../tina/__generated__/client';
+import EventsComponent from '../components/Events';
 
 export default function Events() {
+  const [coachingData, setCoachingData] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    client.queries.coaching({ relativePath: 'coaching.json' })
+      .then((res) => {
+        setCoachingData(res.data.coaching);
+        setLoading(false);
+      })
+      .catch(async (err) => {
+        console.error('Tina fetch failed, falling back to static data:', err);
+        try {
+          const staticData = await import('../../content/pages/coaching.json');
+          setCoachingData(staticData.default || staticData);
+          setLoading(false);
+        } catch (staticErr) {
+          console.error('Static fallback failed:', staticErr);
+          setLoading(false);
+        }
+      });
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="pt-32 flex justify-center items-center min-h-[60vh]">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600"></div>
+      </div>
+    );
+  }
+
   return (
-    <div className="pt-32 pb-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-[80vh]">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-8">Club Events</h1>
-        <p className="text-xl text-gray-600 mb-12 max-w-3xl">
-          Discover our upcoming tournaments, social gatherings, and special events.
-        </p>
-        
-        <div className="bg-emerald-50 rounded-2xl p-12 mt-8 text-center border border-emerald-100 flex flex-col items-center justify-center">
-          <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mb-6">
-            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-            </svg>
-          </div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">2026 Calendar Coming Soon</h2>
-          <p className="text-gray-600 max-w-md mx-auto">
-            We are currently finalizing our events calendar for the upcoming season. Check back regularly for updates on tournaments and social events.
-          </p>
+    <div className="pt-12 min-h-[80vh] bg-gray-50">
+      {coachingData?.events && coachingData.events.length > 0 ? (
+        <EventsComponent events={coachingData.events} />
+      ) : (
+        <div className="pt-32 text-center py-20">
+          <h2 className="text-2xl font-bold text-gray-900">No events found.</h2>
+          <p className="text-gray-500 mt-2">Check back later for new event listings.</p>
         </div>
-      </motion.div>
+      )}
     </div>
   );
 }

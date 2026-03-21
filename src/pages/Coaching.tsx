@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import client from '../../tina/__generated__/client';
-import Events from '../components/Events';
 import Programs from '../components/Programs';
 import CoachingDetail from '../components/CoachingDetail';
 
@@ -47,7 +46,6 @@ export default function Coaching() {
 
   return (
     <div className="pt-24">
-      <Events events={coachingData.events} />
       <Programs programs={coachingData.programs} />
       <CoachingDetail 
         programDetails={coachingData.programDetails} 
