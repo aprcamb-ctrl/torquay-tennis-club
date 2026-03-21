@@ -59,7 +59,14 @@ You can find more details in the Events section!`;
     return `You can reach us at ${CLUB_KNOWLEDGE.contact.phone} or ${CLUB_KNOWLEDGE.contact.email}.`;
   }
 
-  // 6. Check JSON Knowledge Base (questions directly)
+  // 6. Check JSON Knowledge Base (club_knowledge_base with tags)
+  const clubMatch = (knowledgeBase as any).club_knowledge_base?.find((item: any) => 
+    item.tags.some((tag: string) => lowerInput.includes(tag.toLowerCase())) ||
+    item.question.toLowerCase().split(' ').some((word: string) => word.length > 3 && lowerInput.includes(word))
+  );
+  if (clubMatch) return clubMatch.answer;
+
+  // 7. Check Legacy Knowledge Base (additional_answers)
   const kbMatch = knowledgeBase.additional_answers.find(item => 
     item.question.toLowerCase().split(' ').some(word => word.length > 3 && lowerInput.includes(word))
   );

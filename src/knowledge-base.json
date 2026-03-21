@@ -12,5 +12,43 @@
       "question": "Do you offer private coaching?",
       "answer": "Yes, we have several professional coaches available for private sessions. You can book them at the reception."
     }
+  ],
+  "club_knowledge_base": [
+    {
+      "category": "General",
+      "question": "Where is Torquay Tennis Club located?",
+      "answer": "We are located on Belgrave Road, Torquay, TQ2 5HP, just off the main seafront. We have on-site parking for members and visitors.",
+      "tags": ["location", "address", "map", "parking", "where"]
+    },
+    {
+      "category": "Membership",
+      "question": "What are the membership options and prices?",
+      "answer": "Our 2026 rates include: Full Adult (£359/year), Family (£659/year), and Under 25s (£139/year). New members who haven't joined in 5 years may qualify for the 'NEW' rate of £249.",
+      "tags": ["fees", "cost", "join", "subscription", "price"]
+    },
+    {
+      "category": "Padel & Pickleball",
+      "question": "Do you offer Padel or Pickleball?",
+      "answer": "Yes! We have a Padel court (Members: £16/hr, Non-members: £24/hr) and dedicated Pickleball courts. We host regular social sessions and festivals for both.",
+      "tags": ["padel", "pickleball", "bat hire", "racket sports"]
+    },
+    {
+      "category": "Coaching",
+      "question": "How do I book a tennis lesson?",
+      "answer": "You can book via Head Coach Steve Maslen or Tracy (Coaching Coordinator) at 07852 917776. We offer 1-on-1s and group squads for all ages.",
+      "tags": ["coach", "lessons", "training", "learn", "steve maslen"]
+    },
+    {
+      "category": "Visitors",
+      "question": "Can non-members play?",
+      "answer": "Yes! You can use our 'Pay and Play' system via the LTA Rally platform or play as a guest for £10 (up to 3 visits).",
+      "tags": ["guest", "non-member", "visitor", "public", "pay and play"]
+    },
+    {
+      "category": "Facilities",
+      "question": "What are your court surfaces and lighting?",
+      "answer": "We have 9 outdoor courts (Artificial Clay/Tiger Turf) and 3 indoor Acrylic courts. Floodlights are available for evening play.",
+      "tags": ["indoor", "clay", "floodlights", "night play", "surfaces"]
+    }
   ]
 }
